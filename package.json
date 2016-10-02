@@ -1,0 +1,38 @@
+{
+  "name": "react-hint",
+  "version": "1.0.0",
+  "description": "a simple tooltip component for React",
+  "author": "Vladimir Simonov <slmgc@ya.ru>",
+  "homepage": "https://github.com/slmgc/react-hint",
+  "repository": "slmgc/react-hint",
+  "license": "MIT",
+  "main": "lib",
+  "jsnext:main": "src",
+  "style": "css/index.css",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "postcss --use autoprefixer src/css/*.css -d css",
+    "build:js": "nwb build-react-component",
+    "start": "nwb serve-react-demo --port 8080"
+  },
+  "devDependencies": {
+    "autoprefixer": "6.x",
+    "nwb": "0.12.x",
+    "postcss-cli": "2.x",
+    "react": ">=0.14",
+    "react-dom": ">=0.14"
+  },
+  "files": [
+    "css",
+    "lib",
+    "src",
+    "umd"
+  ],
+  "keywords": [
+    "preact",
+    "react",
+    "react-component",
+    "react-tooltip",
+    "tooltip"
+  ]
+}
