@@ -12,6 +12,9 @@ npm i -S react-hint
 
 How to use
 ----------
+
+`<ReactHint />` is a singleton component which should be placed in the root component. To show a tooltip on any DOM element and it's children add `data-rh` attribute to the element. The default placement of a tooltip is at the top, but you can add `data-rh-at` attribute to change the placement. Supported values are: `top`, `left`, `right`, `bottom`.
+
 ```jsx
 import React from 'react'
 import {render} from 'react-dom'
