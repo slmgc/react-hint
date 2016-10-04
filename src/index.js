@@ -39,10 +39,8 @@ export default class ReactHint extends React.Component {
 
 	componentDidUpdate() {
 		const {target} = this.state
-		const {hint} = this.refs
-
-		if (!target || !hint) return
-		this.setState(this.getHintPosition(hint, target))
+		if (!target || !this._hint) return
+		this.setState(this.getHintPosition(this._hint, target))
 	}
 
 	componentWillUnmout() {
@@ -91,6 +89,10 @@ export default class ReactHint extends React.Component {
 		}
 	}
 
+	setHintRef = (ref) => {
+		this._hint = ref
+	}
+
 	onHover = ({target}) => {
 		this.setState({target: this.findHint(target)})
 	}
@@ -102,7 +104,7 @@ export default class ReactHint extends React.Component {
 		return target &&
 			<div className={`${className} ${className}--${at}`}
 				style={{top, left}}
-				ref="hint">
+				ref={this.setHintRef}>
 					<div className={`${className}__content`}>
 						{target.getAttribute('data-rh')}
 					</div>

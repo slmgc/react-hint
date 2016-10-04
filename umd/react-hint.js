@@ -1,5 +1,5 @@
 /*!
- * react-hint v1.0.0 - https://github.com/slmgc/react-hint
+ * react-hint v1.0.1 - https://github.com/slmgc/react-hint
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -154,6 +154,8 @@ return /******/ (function(modules) { // webpackBootstrap
 							left: left + (width - offsetWidth >> 1)
 						};
 				}
+			}, _this.setHintRef = function (ref) {
+				_this._hint = ref;
 			}, _this.onHover = function (_ref) {
 				var target = _ref.target;
 
@@ -180,11 +182,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		ReactHint.prototype.componentDidUpdate = function componentDidUpdate() {
 			var target = this.state.target;
-			var hint = this.refs.hint;
 
-
-			if (!target || !hint) return;
-			this.setState(this.getHintPosition(hint, target));
+			if (!target || !this._hint) return;
+			this.setState(this.getHintPosition(this._hint, target));
 		};
 
 		ReactHint.prototype.componentWillUnmout = function componentWillUnmout() {
@@ -205,9 +205,9 @@ return /******/ (function(modules) { // webpackBootstrap
 				'div',
 				{ className: className + ' ' + className + '--' + at,
 					style: { top: top, left: left },
-					ref: 'hint', __source: {
+					ref: this.setHintRef, __source: {
 						fileName: _jsxFileName,
-						lineNumber: 103
+						lineNumber: 105
 					},
 					__self: this
 				},
@@ -215,7 +215,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					'div',
 					{ className: className + '__content', __source: {
 							fileName: _jsxFileName,
-							lineNumber: 106
+							lineNumber: 108
 						},
 						__self: this
 					},

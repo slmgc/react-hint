@@ -1,6 +1,6 @@
 react-hint
 ==========
-**react-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It doesn't include any fancy stuff, but it gets the job done. It also plays nicely with [Preact](https://github.com/developit/preact).
+**react-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It doesn't include any fancy stuff, but it gets the job done. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno) (1.0.0-beta3).
 
 ![react-hint tooltip](demo/react-hint.gif)
 
