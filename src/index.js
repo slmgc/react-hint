@@ -27,8 +27,8 @@ export default class ReactHint extends React.Component {
 		const {props, state} = this
 		return target !== state.target
 			|| at !== state.at
-			|| Math.abs(top - state.top) > 1
-			|| Math.abs(left - state.left) > 1
+			|| top !== state.top
+			|| left !== state.left
 			|| className !== props.className
 	}
 
@@ -39,8 +39,8 @@ export default class ReactHint extends React.Component {
 
 	componentDidUpdate() {
 		const {target} = this.state
-		if (!target || !this._hint) return
-		this.setState(this.getHintPosition(this._hint, target))
+		if (!target) return
+		this.setState(this.getPosition(target))
 	}
 
 	componentWillUnmout() {
@@ -56,58 +56,81 @@ export default class ReactHint extends React.Component {
 		} return null
 	}
 
-	getHintPosition = (hint, target) => {
-		const {offsetWidth, offsetHeight} = hint
-		const {width, height, top, left} = target.getBoundingClientRect()
-		const at = target.getAttribute('data-rh-at')
+	getPosition = (target) => {
+		const {_container, _hint} = this
+
+		const {
+			top: container_top,
+			left: container_left,
+		} = _container.getBoundingClientRect()
+
+		const {
+			width: hint_width,
+			height: hint_height,
+		} = _hint.getBoundingClientRect()
+
+		const {
+			top: target_top,
+			left: target_left,
+			width: target_width,
+			height: target_height,
+		} = target.getBoundingClientRect()
+
+		let top, left
+		const at = target.getAttribute('data-rh-at') || 'top'
 
 		switch (at) {
-			case 'left': return {
-				at,
-				top: top + (height - offsetHeight >> 1),
-				left: left - offsetWidth
-			}
+			case 'left':
+				top = target_height - hint_height >> 1
+				left = -hint_width
+				break
 
-			case 'right': return {
-				at,
-				top: top + (height - offsetHeight >> 1),
-				left: left + width
-			}
+			case 'right':
+				top = target_height - hint_height >> 1
+				left = target_width
+				break
 
-			case 'bottom': return {
-				at,
-				top: top + height,
-				left: left + (width - offsetWidth >> 1)
-			}
+			case 'bottom':
+				top = target_height
+				left = target_width - hint_width >> 1
+				break
 
 			case 'top':
-			default: return {
-				at: 'top',
-				top: top - offsetHeight,
-				left: left + (width - offsetWidth >> 1)
-			}
+			default:
+				top = -hint_height
+				left = target_width - hint_width >> 1
+		}
+
+		return {
+			at,
+			top: top + target_top - container_top,
+			left: left + target_left - container_left
 		}
 	}
 
-	setHintRef = (ref) => {
-		this._hint = ref
-	}
-
-	onHover = ({target}) => {
+	onHover = ({target}) =>
 		this.setState({target: this.findHint(target)})
-	}
+
+	setRef = (name, ref) =>
+		this[name] = ref
 
 	render() {
 		const {className} = this.props
 		const {target, at, top, left} = this.state
 
-		return target &&
-			<div className={`${className} ${className}--${at}`}
-				style={{top, left}}
-				ref={this.setHintRef}>
-					<div className={`${className}__content`}>
-						{target.getAttribute('data-rh')}
-					</div>
+		return (
+			<div style={{position: 'relative'}}
+				ref={this.setRef.bind(this, '_container')}>
+					{target &&
+						<div className={`${className} ${className}--${at}`}
+							ref={this.setRef.bind(this, '_hint')}
+							style={{top, left}}>
+								<div className={`${className}__content`}>
+									{target.getAttribute('data-rh')}
+								</div>
+						</div>
+					}
 			</div>
+		)
 	}
 }

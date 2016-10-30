@@ -1,6 +1,6 @@
 {
   "name": "react-hint",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "a simple tooltip component for React",
   "author": "Vladimir Simonov <slmgc@ya.ru>",
   "homepage": "https://github.com/slmgc/react-hint",
@@ -19,6 +19,7 @@
     "autoprefixer": "6.x",
     "nwb": "0.12.x",
     "postcss-cli": "2.x",
+    "primer-buttons": "*",
     "react": ">=0.14",
     "react-dom": ">=0.14"
   },
@@ -29,11 +30,11 @@
     "umd"
   ],
   "keywords": [
-    "inferno",
-    "preact",
+    "tooltip",
     "react",
-    "react-component",
     "react-tooltip",
-    "tooltip"
+    "react-component",
+    "preact",
+    "inferno"
   ]
 }
