@@ -1,5 +1,5 @@
 /*!
- * react-hint v1.1.0 - https://github.com/slmgc/react-hint
+ * react-hint v1.2.0 - https://github.com/slmgc/react-hint
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -186,20 +186,25 @@ return /******/ (function(modules) { // webpackBootstrap
 		};
 
 		ReactHint.prototype.componentDidMount = function componentDidMount() {
+			if (ReactHint.instance) ReactHint.instance = null;
 			ReactHint.instance = this;
-			document.addEventListener('mouseover', this.onHover);
 		};
 
 		ReactHint.prototype.componentDidUpdate = function componentDidUpdate() {
 			var target = this.state.target;
 
 			if (!target) return;
-			this.setState(this.getPosition(target));
-		};
 
-		ReactHint.prototype.componentWillUnmout = function componentWillUnmout() {
-			ReactHint.instance = null;
-			document.removeEventListener('mouseover', this.onHover);
+			var _target$getBoundingCl2 = target.getBoundingClientRect();
+
+			var top = _target$getBoundingCl2.top;
+			var left = _target$getBoundingCl2.left;
+			var width = _target$getBoundingCl2.width;
+			var height = _target$getBoundingCl2.height;
+
+			if (!(top || left || width || height)) return;
+
+			this.setState(this.getPosition(target));
 		};
 
 		ReactHint.prototype.render = function render() {
@@ -216,7 +221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				{ style: { position: 'relative' },
 					ref: this.setRef.bind(this, '_container'), __source: {
 						fileName: _jsxFileName,
-						lineNumber: 122
+						lineNumber: 127
 					},
 					__self: this
 				},
@@ -226,7 +231,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						ref: this.setRef.bind(this, '_hint'),
 						style: { top: top, left: left }, __source: {
 							fileName: _jsxFileName,
-							lineNumber: 125
+							lineNumber: 130
 						},
 						__self: this
 					},
@@ -234,7 +239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						'div',
 						{ className: className + '__content', __source: {
 								fileName: _jsxFileName,
-								lineNumber: 128
+								lineNumber: 133
 							},
 							__self: this
 						},
@@ -250,7 +255,12 @@ return /******/ (function(modules) { // webpackBootstrap
 				return ReactHint._instance;
 			},
 			set: function set(instance) {
-				if (ReactHint._instance) throw new Error('Only one instance of ReactHint is allowed.');
+				if (instance) {
+					document.addEventListener('mouseover', instance.onHover);
+				} else {
+					document.removeEventListener('mouseover', ReactHint.instance.onHover);
+				}
+
 				ReactHint._instance = instance;
 			}
 		}]);
