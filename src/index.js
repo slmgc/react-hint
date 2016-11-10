@@ -8,7 +8,13 @@ export default class ReactHint extends React.Component {
 	}
 
 	static set instance(instance) {
-		if (ReactHint._instance) throw new Error('Only one instance of ReactHint is allowed.')
+		if (instance) {
+			document.addEventListener('mouseover', instance.onHover)
+		} else {
+			document.removeEventListener('mouseover',
+				ReactHint.instance.onHover)
+		}
+
 		ReactHint._instance = instance
 	}
 
@@ -33,19 +39,14 @@ export default class ReactHint extends React.Component {
 	}
 
 	componentDidMount() {
+		if (ReactHint.instance) ReactHint.instance = null
 		ReactHint.instance = this
-		document.addEventListener('mouseover', this.onHover)
 	}
 
 	componentDidUpdate() {
 		const {target} = this.state
 		if (!target) return
 		this.setState(this.getPosition(target))
-	}
-
-	componentWillUnmout() {
-		ReactHint.instance = null
-		document.removeEventListener('mouseover', this.onHover)
 	}
 
 	findHint = (el) => {
