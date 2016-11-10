@@ -46,6 +46,10 @@ export default class ReactHint extends React.Component {
 	componentDidUpdate() {
 		const {target} = this.state
 		if (!target) return
+
+		const {top, left, width, height} = target.getBoundingClientRect()
+		if (!(top || left || width || height)) return
+
 		this.setState(this.getPosition(target))
 	}
 
