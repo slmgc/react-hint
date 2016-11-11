@@ -1,5 +1,5 @@
 /*!
- * react-hint v1.2.0 - https://github.com/slmgc/react-hint
+ * react-hint v1.2.1 - https://github.com/slmgc/react-hint
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -207,6 +207,10 @@ return /******/ (function(modules) { // webpackBootstrap
 			this.setState(this.getPosition(target));
 		};
 
+		ReactHint.prototype.componentWillUnmount = function componentWillUnmount() {
+			ReactHint.instance = null;
+		};
+
 		ReactHint.prototype.render = function render() {
 			var className = this.props.className;
 			var _state = this.state;
@@ -221,7 +225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				{ style: { position: 'relative' },
 					ref: this.setRef.bind(this, '_container'), __source: {
 						fileName: _jsxFileName,
-						lineNumber: 127
+						lineNumber: 131
 					},
 					__self: this
 				},
@@ -231,7 +235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						ref: this.setRef.bind(this, '_hint'),
 						style: { top: top, left: left }, __source: {
 							fileName: _jsxFileName,
-							lineNumber: 130
+							lineNumber: 134
 						},
 						__self: this
 					},
@@ -239,7 +243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						'div',
 						{ className: className + '__content', __source: {
 								fileName: _jsxFileName,
-								lineNumber: 133
+								lineNumber: 137
 							},
 							__self: this
 						},
