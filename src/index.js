@@ -53,6 +53,10 @@ export default class ReactHint extends React.Component {
 		this.setState(this.getPosition(target))
 	}
 
+	componentWillUnmount() {
+		ReactHint.instance = null
+	}
+
 	findHint = (el) => {
 		while (el) {
 			if (el === document) break
