@@ -61,6 +61,7 @@ export default class ReactHint extends React.Component {
 		while (el) {
 			if (el === document) break
 			if (el.hasAttribute('data-rh')) return el
+			if (el === this._hint) return this.state.target
 			el = el.parentNode
 		} return null
 	}
@@ -117,8 +118,13 @@ export default class ReactHint extends React.Component {
 		}
 	}
 
-	onHover = ({target}) =>
-		this.setState({target: this.findHint(target)})
+	onHover = ({target}) => {
+		clearTimeout(this.timeout)
+		this.timeout = setTimeout(() => {
+			target = this.findHint(target)
+			this.setState({target})
+		}, 100)
+	}
 
 	setRef = (name, ref) =>
 		this[name] = ref
