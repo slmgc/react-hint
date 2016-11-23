@@ -1,7 +1,7 @@
 {
   "name": "react-hint",
-  "version": "1.2.1",
-  "description": "a simple tooltip component for React",
+  "version": "1.2.2",
+  "description": "Tooltip component for React, Preact & Inferno",
   "author": "Vladimir Simonov <slmgc@ya.ru>",
   "homepage": "https://github.com/slmgc/react-hint",
   "repository": "slmgc/react-hint",

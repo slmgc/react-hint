@@ -1,5 +1,5 @@
 /*!
- * react-hint v1.2.1 - https://github.com/slmgc/react-hint
+ * react-hint v1.2.2 - https://github.com/slmgc/react-hint
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -109,6 +109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				while (el) {
 					if (el === document) break;
 					if (el.hasAttribute('data-rh')) return el;
+					if (el === _this._hint) return _this.state.target;
 					el = el.parentNode;
 				}return null;
 			}, _this.getPosition = function (target) {
@@ -167,7 +168,12 @@ return /******/ (function(modules) { // webpackBootstrap
 				};
 			}, _this.onHover = function (_ref) {
 				var target = _ref.target;
-				return _this.setState({ target: _this.findHint(target) });
+
+				clearTimeout(_this.timeout);
+				_this.timeout = setTimeout(function () {
+					target = _this.findHint(target);
+					_this.setState({ target: target });
+				}, 100);
 			}, _this.setRef = function (name, ref) {
 				return _this[name] = ref;
 			}, _temp), _possibleConstructorReturn(_this, _ret);
@@ -225,7 +231,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				{ style: { position: 'relative' },
 					ref: this.setRef.bind(this, '_container'), __source: {
 						fileName: _jsxFileName,
-						lineNumber: 131
+						lineNumber: 137
 					},
 					__self: this
 				},
@@ -235,7 +241,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						ref: this.setRef.bind(this, '_hint'),
 						style: { top: top, left: left }, __source: {
 							fileName: _jsxFileName,
-							lineNumber: 134
+							lineNumber: 140
 						},
 						__self: this
 					},
@@ -243,7 +249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						'div',
 						{ className: className + '__content', __source: {
 								fileName: _jsxFileName,
-								lineNumber: 137
+								lineNumber: 143
 							},
 							__self: this
 						},
