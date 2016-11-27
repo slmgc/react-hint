@@ -24,14 +24,16 @@ export default class ReactHint extends React.Component {
 
 	state = {
 		target: null,
+		cls: null,
 		at: 'top',
 		top: 0,
 		left: 0
 	}
 
-	shouldComponentUpdate({className}, {target, at, top, left}) {
+	shouldComponentUpdate({className}, {target, cls, at, top, left}) {
 		const {props, state} = this
 		return target !== state.target
+			|| cls !== state.cls
 			|| at !== state.at
 			|| top !== state.top
 			|| left !== state.left
@@ -122,26 +124,38 @@ export default class ReactHint extends React.Component {
 		clearTimeout(this.timeout)
 		this.timeout = setTimeout(() => {
 			target = this.findHint(target)
-			this.setState({target})
+			const cls = target ? target.getAttribute('data-rh-cls') : null
+			this.setState({target, cls})
 		}, 100)
 	}
 
 	setRef = (name, ref) =>
 		this[name] = ref
 
+	renderContent = (target) => {
+		const text = target.getAttribute('data-rh')
+
+		if (text[0] === '#') {
+			const el = document.getElementById(text.slice(1))
+			if (el) return <span dangerouslySetInnerHTML={{__html: el.innerHTML}} />
+		}
+
+		return text
+	}
+
 	render() {
 		const {className} = this.props
-		const {target, at, top, left} = this.state
+		const {target, cls, at, top, left} = this.state
 
 		return (
 			<div style={{position: 'relative'}}
 				ref={this.setRef.bind(this, '_container')}>
 					{target &&
-						<div className={`${className} ${className}--${at}`}
+						<div className={`${className} ${className}--${at} ${cls}`}
 							ref={this.setRef.bind(this, '_hint')}
 							style={{top, left}}>
 								<div className={`${className}__content`}>
-									{target.getAttribute('data-rh')}
+									{this.renderContent(target)}
 								</div>
 						</div>
 					}
