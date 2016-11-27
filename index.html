@@ -65,7 +65,59 @@
 			<pre><code>npm i -S react-hint</code></pre>
 
 			<h2><a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h2>
-			<p><code>&lt;ReactHint /&gt;</code> is a singleton component. To show a tooltip on any DOM element and its children add <code>data-rh</code> attribute to the element. The default placement of a tooltip is at the top, but you can add <code>data-rh-at</code> attribute to change the placement. Supported values are: <code>top</code>, <code>left</code>, <code>right</code>, <code>bottom</code>. You can completely override tooltip style by passing <code>className</code> property to <code>&lt;ReactHint /&gt;</code>.</p>
+			<p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">ReactHint Property</th>
+							<th align="left">Type</th>
+							<th align="left">Default Value</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td align="left">className</td>
+							<td align="left">String</td>
+							<td align="left">react-hint</td>
+							<td align="left"><code>&lt;ReactHint /&gt;</code> is a singleton component. You can completely override the default tooltip style by passing <code>className</code> property with a new base class name.</td>
+						</tr>
+					</tbody>
+				</table>
+			</p>
+
+			<p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Element Attribute</th>
+							<th align="left">Type</th>
+							<th align="left">Default Value</th>
+							<th align="left">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td align="left">data-rh</td>
+							<td align="left">String or #element-id</td>
+							<td align="left"></td>
+							<td align="left">To show a tooltip on any DOM element and its children add <code>data-rh</code> attribute with a tooltip text to the element. Pass <code>#element-id</code> instead of a text to show the element's HTML content.</td>
+						</tr>
+						<tr>
+							<td align="left">data-rh-at</td>
+							<td align="left">top, left, right, bottom</td>
+							<td align="left">top</td>
+							<td align="left">The default placement of a tooltip is at the top, but you can add <code>data-rh-at</code> attribute to change the placement.</td>
+						</tr>
+						<tr>
+							<td align="left">data-rh-cls</td>
+							<td align="left">String</td>
+							<td align="left"></td>
+							<td align="left">To customize a single tooltip add <code>data-rh-cls</code> with a class name which will be added to the tooltip.</td>
+						</tr>
+					</tbody>
+				</table>
+			</p>
 
 <div class="highlight highlight-source-js-jsx"><pre><span class="pl-k">import</span><span class="pl-smi"> React</span><span class="pl-k"> from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>
 <span class="pl-k">import</span> {<span class="pl-smi">render</span>}<span class="pl-k"> from</span> <span class="pl-s"><span class="pl-pds">'</span>react-dom<span class="pl-pds">'</span></span>
