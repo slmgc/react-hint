@@ -1,123 +1,123 @@
 <!DOCTYPE html>
 <html lang="en-us">
-	<head>
-		<meta charset="UTF-8">
-		<title>react-hint - a simple tooltip component for React</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8">
+    <title>react-hint - a simple tooltip component for React</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="stylesheets/primer-buttons.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="https://unpkg.com/react-hint/css/index.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/primer-buttons.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/react-hint/css/index.css" media="screen">
 
 <style>
 .react-hint--custom .react-hint__content {
-	background: ivory;
-	color: #000;
-	box-shadow: 0px 0px 2px 1px rgba(0,0,0,.5);
-	border-radius: 0;
-	border: 0;
-	font-size: 14px;
+  background: ivory;
+  color: #000;
+  box-shadow: 0px 0px 2px 1px rgba(0,0,0,.5);
+  border-radius: 0;
+  border: 0;
+  font-size: 14px;
 }
 
 .react-hint--custom:after {
-	display: none;
+  display: none;
 }
 
 .react-hint--custom img {
-	display: block;
-	margin-top: 10px;
+  display: block;
+  margin-top: 10px;
 }
 </style>
 
-	</head>
-	<body>
-		<section class="page-header">
-			<h1 class="project-name">React-hint</h1>
-			<h2 class="project-tagline">a simple tooltip component for React</h2>
-			<a href="https://github.com/slmgc/react-hint" class="btn-theme">View on GitHub</a>
-			<a href="https://github.com/slmgc/react-hint/zipball/master" class="btn-theme">Download .zip</a>
-			<a href="https://github.com/slmgc/react-hint/tarball/master" class="btn-theme">Download .tar.gz</a>
-		</section>
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">React-hint</h1>
+      <h2 class="project-tagline">a simple tooltip component for React</h2>
+      <a href="https://github.com/slmgc/react-hint" class="btn-theme">View on GitHub</a>
+      <a href="https://github.com/slmgc/react-hint/zipball/master" class="btn-theme">Download .zip</a>
+      <a href="https://github.com/slmgc/react-hint/tarball/master" class="btn-theme">Download .tar.gz</a>
+    </section>
 
-		<section class="main-content">
-			<h1><a id="react-hint" class="anchor" href="#react-hint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>react-hint</h1>
-			<p><strong>react-hint</strong> is a small tooltip component for <a href="https://github.com/facebook/react">React</a> which is developed with simplicity and performance in mind. It doesn't include any fancy stuff, but it gets the job done. It also plays nicely with <a href="https://github.com/developit/preact">Preact</a> and <a href="https://github.com/trueadm/inferno">Inferno</a> (1.0.0-beta3).</p>
+    <section class="main-content">
+      <h1><a id="react-hint" class="anchor" href="#react-hint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>react-hint</h1>
+      <p><strong>react-hint</strong> is a small tooltip component for <a href="https://github.com/facebook/react">React</a> which is developed with simplicity and performance in mind. It doesn't include any fancy stuff, but it gets the job done. It also plays nicely with <a href="https://github.com/developit/preact">Preact</a> and <a href="https://github.com/trueadm/inferno">Inferno</a> (1.0.0-beta3).</p>
 
-			<p>
-				<div id="react"></div>
-				<button class="btn" data-rh="Default">Default</button>
-				<button class="btn" data-rh="Top" data-rh-at="top">Top</button>
-				<button class="btn" data-rh="Left" data-rh-at="left">Left</button>
-				<button class="btn" data-rh="Right" data-rh-at="right">Right</button>
-				<button class="btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
-				<button class="btn btn-outline" data-rh="#custom" data-rh-cls="react-hint--custom">Custom</button>
-				<div style="display: none" id="custom">
-					Here goes a custom tooltip.<br />
-					You can show <b>HTML</b> content in tooltips.
-					<img src="//placekitten.com/260/100" />
-				</div>
-			</p>
+      <p>
+        <div id="react"></div>
+        <button class="btn" data-rh="Default">Default</button>
+        <button class="btn" data-rh="Top" data-rh-at="top">Top</button>
+        <button class="btn" data-rh="Left" data-rh-at="left">Left</button>
+        <button class="btn" data-rh="Right" data-rh-at="right">Right</button>
+        <button class="btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+        <button class="btn btn-outline" data-rh="#custom" data-rh-cls="react-hint--custom">Custom</button>
+        <div style="display: none" id="custom">
+          Here goes a custom tooltip.<br />
+          You can show <b>HTML</b> content in tooltips.
+          <img src="//placekitten.com/260/100" />
+        </div>
+      </p>
 
-			<h2><a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install</h2>
-			<pre><code>npm i -S react-hint</code></pre>
+      <h2><a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install</h2>
+      <pre><code>npm i -S react-hint</code></pre>
 
-			<h2><a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h2>
-			<p>
-				<table>
-					<thead>
-						<tr>
-							<th align="left" width="20%">ReactHint Property</th>
-							<th align="left" width="20%">Type</th>
-							<th align="left" width="20%">Default Value</th>
-							<th align="left">Description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td align="left">className</td>
-							<td align="left">String</td>
-							<td align="left">react-hint</td>
-							<td align="left"><code>&lt;ReactHint /&gt;</code> is a singleton component. You can completely override the default tooltip style by passing <code>className</code> property with a new base class name.</td>
-						</tr>
-					</tbody>
-				</table>
-			</p>
+      <h2><a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h2>
+      <p>
+        <table>
+          <thead>
+            <tr>
+              <th align="left" width="20%">ReactHint Property</th>
+              <th align="left" width="20%">Type</th>
+              <th align="left" width="20%">Default Value</th>
+              <th align="left">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left">className</td>
+              <td align="left">String</td>
+              <td align="left">react-hint</td>
+              <td align="left"><code>&lt;ReactHint /&gt;</code> is a singleton component. You can completely override the default tooltip style by passing <code>className</code> property with a new base class name.</td>
+            </tr>
+          </tbody>
+        </table>
+      </p>
 
-			<p>
-				<table>
-					<thead>
-						<tr>
-							<th align="left" width="20%">Element Attribute</th>
-							<th align="left" width="20%">Type</th>
-							<th align="left" width="20%">Default Value</th>
-							<th align="left">Description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td align="left">data-rh</td>
-							<td align="left">String or #element-id</td>
-							<td align="left"></td>
-							<td align="left">To show a tooltip on any DOM element and its children add <code>data-rh</code> attribute with a tooltip text to the element. Pass <code>#element-id</code> instead of a text to show the element's HTML content.</td>
-						</tr>
-						<tr>
-							<td align="left">data-rh-at</td>
-							<td align="left">top, left, right, bottom</td>
-							<td align="left">top</td>
-							<td align="left">The default placement of a tooltip is at the top, but you can add <code>data-rh-at</code> attribute to change the placement.</td>
-						</tr>
-						<tr>
-							<td align="left">data-rh-cls</td>
-							<td align="left">String</td>
-							<td align="left"></td>
-							<td align="left">To customize a single tooltip add <code>data-rh-cls</code> with a class name which will be added to the tooltip.</td>
-						</tr>
-					</tbody>
-				</table>
-			</p>
+      <p>
+        <table>
+          <thead>
+            <tr>
+              <th align="left" width="20%">Element Attribute</th>
+              <th align="left" width="20%">Type</th>
+              <th align="left" width="20%">Default Value</th>
+              <th align="left">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left">data-rh</td>
+              <td align="left">String or #element-id</td>
+              <td align="left"></td>
+              <td align="left">To show a tooltip on any DOM element and its children add <code>data-rh</code> attribute with a tooltip text to the element. Pass <code>#element-id</code> instead of a text to show the element's HTML content.</td>
+            </tr>
+            <tr>
+              <td align="left">data-rh-at</td>
+              <td align="left">top, left, right, bottom</td>
+              <td align="left">top</td>
+              <td align="left">The default placement of a tooltip is at the top, but you can add <code>data-rh-at</code> attribute to change the placement.</td>
+            </tr>
+            <tr>
+              <td align="left">data-rh-cls</td>
+              <td align="left">String</td>
+              <td align="left"></td>
+              <td align="left">To customize a single tooltip add <code>data-rh-cls</code> with a class name which will be added to the tooltip.</td>
+            </tr>
+          </tbody>
+        </table>
+      </p>
 
 <div class="highlight highlight-source-js-jsx"><pre><span class="pl-k">import</span><span class="pl-smi"> React</span><span class="pl-k"> from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>
 <span class="pl-k">import</span> {<span class="pl-smi">render</span>}<span class="pl-k"> from</span> <span class="pl-s"><span class="pl-pds">'</span>react-dom<span class="pl-pds">'</span></span>
@@ -125,50 +125,50 @@
 <span class="pl-k">import</span> <span class="pl-s"><span class="pl-pds">'</span>react-hint/css/index.css<span class="pl-pds">'</span></span>
 
 <span class="pl-k">class</span> <span class="pl-en">Demo</span> <span class="pl-k">extends</span> <span class="pl-en">React</span><span class="pl-k">.</span><span class="pl-smi">Component</span> {
-	<span class="pl-smi">state</span> <span class="pl-k">=</span> {<span class="pl-c1"><span class="pl-s">count</span>:</span> <span class="pl-c1">0</span>}
+  <span class="pl-smi">state</span> <span class="pl-k">=</span> {<span class="pl-c1"><span class="pl-s">count</span>:</span> <span class="pl-c1">0</span>}
 
-	<span class="pl-en">componentDidMount</span>() {
-		<span class="pl-en">setInterval</span>(() <span class="pl-k">=&gt;</span> {
-<span class="pl-v">			this</span><span class="pl-k">.</span><span class="pl-en">setState</span>({<span class="pl-c1"><span class="pl-s">count</span>:</span><span class="pl-v"> this</span><span class="pl-k">.</span><span class="pl-smi">state</span><span class="pl-k">.</span><span class="pl-smi">count</span><span class="pl-k"> +</span> <span class="pl-c1">1</span>})
-			<span class="pl-smi">ReactHint</span><span class="pl-k">.</span><span class="pl-smi">instance</span><span class="pl-k">.</span><span class="pl-en">forceUpdate</span>()
-		}, <span class="pl-c1">1000</span>)
-	}
+  <span class="pl-en">componentDidMount</span>() {
+    <span class="pl-en">setInterval</span>(() <span class="pl-k">=&gt;</span> {
+<span class="pl-v">      this</span><span class="pl-k">.</span><span class="pl-en">setState</span>({<span class="pl-c1"><span class="pl-s">count</span>:</span><span class="pl-v"> this</span><span class="pl-k">.</span><span class="pl-smi">state</span><span class="pl-k">.</span><span class="pl-smi">count</span><span class="pl-k"> +</span> <span class="pl-c1">1</span>})
+      <span class="pl-smi">ReactHint</span><span class="pl-k">.</span><span class="pl-smi">instance</span><span class="pl-k">.</span><span class="pl-en">forceUpdate</span>()
+    }, <span class="pl-c1">1000</span>)
+  }
 
-	<span class="pl-en">render</span>() {
-		<span class="pl-k">const</span> {<span class="pl-smi">count</span>} <span class="pl-k">=</span><span class="pl-v"> this</span><span class="pl-k">.</span><span class="pl-smi">state</span>
-		<span class="pl-k">return</span> (
-			&lt;<span class="pl-ent">div</span>&gt;
-				&lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Default<span class="pl-pds">"</span></span>&gt;Default&lt;/<span class="pl-ent">button</span>&gt;
-				&lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Left<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-at</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>left<span class="pl-pds">"</span></span>&gt;Left&lt;/<span class="pl-ent">button</span>&gt;
-				&lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Top<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-at</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>top<span class="pl-pds">"</span></span>&gt;Top&lt;/<span class="pl-ent">button</span>&gt;
-				&lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Bottom<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-at</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>bottom<span class="pl-pds">"</span></span>&gt;Bottom&lt;/<span class="pl-ent">button</span>&gt;
-				&lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Right<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-at</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>right<span class="pl-pds">"</span></span>&gt;Right&lt;/<span class="pl-ent">button</span>&gt;
-				&lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1"><span class="pl-s"><span class="pl-s">`</span><span class="pl-s">Count: <span class="pl-e">${<span class="pl-smi">count</span>}</span></span><span class="pl-s">`</span></span></span><span class="pl-pse">}</span>&gt;Count: <span class="pl-pse">{</span><span class="pl-s1"><span class="pl-smi">count</span></span><span class="pl-pse">}</span>&lt;/<span class="pl-ent">button</span>&gt;
-				&lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>#custom<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-cls</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>react-hint--custom<span class="pl-pds">"</span></span>&gt;Custom&lt;/<span class="pl-ent">button</span>&gt;
-				&lt;<span class="pl-ent"><span class="pl-c1">ReactHint</span></span> /&gt;
+  <span class="pl-en">render</span>() {
+    <span class="pl-k">const</span> {<span class="pl-smi">count</span>} <span class="pl-k">=</span><span class="pl-v"> this</span><span class="pl-k">.</span><span class="pl-smi">state</span>
+    <span class="pl-k">return</span> (
+      &lt;<span class="pl-ent">div</span>&gt;
+        &lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Default<span class="pl-pds">"</span></span>&gt;Default&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Left<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-at</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>left<span class="pl-pds">"</span></span>&gt;Left&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Top<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-at</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>top<span class="pl-pds">"</span></span>&gt;Top&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Bottom<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-at</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>bottom<span class="pl-pds">"</span></span>&gt;Bottom&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Right<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-at</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>right<span class="pl-pds">"</span></span>&gt;Right&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1"><span class="pl-s"><span class="pl-s">`</span><span class="pl-s">Count: <span class="pl-e">${<span class="pl-smi">count</span>}</span></span><span class="pl-s">`</span></span></span><span class="pl-pse">}</span>&gt;Count: <span class="pl-pse">{</span><span class="pl-s1"><span class="pl-smi">count</span></span><span class="pl-pse">}</span>&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;<span class="pl-ent">button</span> <span class="pl-e">data-rh</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>#custom<span class="pl-pds">"</span></span> <span class="pl-e">data-rh-cls</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>react-hint--custom<span class="pl-pds">"</span></span>&gt;Custom&lt;/<span class="pl-ent">button</span>&gt;
+        &lt;<span class="pl-ent"><span class="pl-c1">ReactHint</span></span> /&gt;
 
-				&lt;<span class="pl-ent">div</span> <span class="pl-e">style</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1">{<span class="pl-c1"><span class="pl-s">display</span>:</span> <span class="pl-s"><span class="pl-pds">'</span>none<span class="pl-pds">'</span></span>}</span><span class="pl-pse">}</span> <span class="pl-e">id</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>custom<span class="pl-pds">"</span></span>&gt;
-					Here goes a custom tooltip.&lt;<span class="pl-ent">br</span> /&gt;
-					You can show &lt;<span class="pl-ent">b</span>&gt;HTML&lt;/<span class="pl-ent">b</span>&gt; content in tooltips.
-					&lt;<span class="pl-ent">img</span> <span class="pl-e">src</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>//placekitten.com/260/100<span class="pl-pds">"</span></span> /&gt;
-				&lt;/<span class="pl-ent">div</span>&gt;
-			&lt;/<span class="pl-ent">div</span>&gt;
-		)
-	}
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">style</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1">{<span class="pl-c1"><span class="pl-s">display</span>:</span> <span class="pl-s"><span class="pl-pds">'</span>none<span class="pl-pds">'</span></span>}</span><span class="pl-pse">}</span> <span class="pl-e">id</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>custom<span class="pl-pds">"</span></span>&gt;
+          Here goes a custom tooltip.&lt;<span class="pl-ent">br</span> /&gt;
+          You can show &lt;<span class="pl-ent">b</span>&gt;HTML&lt;/<span class="pl-ent">b</span>&gt; content in tooltips.
+          &lt;<span class="pl-ent">img</span> <span class="pl-e">src</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>//placekitten.com/260/100<span class="pl-pds">"</span></span> /&gt;
+        &lt;/<span class="pl-ent">div</span>&gt;
+      &lt;/<span class="pl-ent">div</span>&gt;
+    )
+  }
 }
 
 <span class="pl-en">render</span>(&lt;<span class="pl-ent"><span class="pl-c1">Demo</span></span> /&gt;,<span class="pl-c1"> document</span><span class="pl-k">.</span><span class="pl-en">getElementById</span>(<span class="pl-s"><span class="pl-pds">'</span>demo<span class="pl-pds">'</span></span>))</pre></div>
 
-			<h2><a id="how-to-rerender" class="anchor" href="#how-to-rerender" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to rerender</h2>
-			<p><strong>react-hint</strong> uses <a href="https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate">shouldComponentUpdate</a> under the hood to decide if it needs to be updated. You can use <code>ReactHint.instance.forceUpdate()</code> in case you want to force an update.</p>
+      <h2><a id="how-to-rerender" class="anchor" href="#how-to-rerender" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to rerender</h2>
+      <p><strong>react-hint</strong> uses <a href="https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate">shouldComponentUpdate</a> under the hood to decide if it needs to be updated. You can use <code>ReactHint.instance.forceUpdate()</code> in case you want to force an update.</p>
 
-			<h2><a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
-			<p>MIT</p>
-		</section>
+      <h2><a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+      <p>MIT</p>
+    </section>
 
-		<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
-		<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
-		<script src="https://unpkg.com/react-hint/umd/react-hint.min.js"></script>
-		<script>ReactDOM.render(React.createElement(ReactHint.default, null), react)</script>
-	</body>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://unpkg.com/react-hint/umd/react-hint.min.js"></script>
+    <script>ReactDOM.render(React.createElement(ReactHint.default, null), react)</script>
+  </body>
 </html>
