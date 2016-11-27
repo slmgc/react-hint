@@ -24,11 +24,8 @@ class Demo extends React.Component {
 				<button className="btn" data-rh="Top" data-rh-at="top">Top</button>
 				<button className="btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
 				<button className="btn" data-rh="Right" data-rh-at="right">Right</button>
-				<div>
 				<button className="btn" data-rh={`Count: ${count}`}>Count: {count}</button>
-				<button className="btn btn-outline" data-rh="#custom" data-rh-cls="react-hint--custom"
-					data-rh-at="right">Custom</button>
-				</div>
+				<button className="btn" data-rh="#custom" data-rh-cls="react-hint--custom">Custom</button>
 				<ReactHint />
 
 				<div style={{display: 'none'}} id="custom">
