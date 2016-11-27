@@ -18,14 +18,24 @@ class Demo extends React.Component {
 	render() {
 		const {count} = this.state
 		return (
-			<div>
+			<div className="centered">
 				<button className="btn" data-rh="Default">Default</button>
-				<button className="btn" data-rh="Top" data-rh-at="top">Top</button>
 				<button className="btn" data-rh="Left" data-rh-at="left">Left</button>
-				<button className="btn" data-rh="Right" data-rh-at="right">Right</button>
+				<button className="btn" data-rh="Top" data-rh-at="top">Top</button>
 				<button className="btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+				<button className="btn" data-rh="Right" data-rh-at="right">Right</button>
+				<div>
 				<button className="btn" data-rh={`Count: ${count}`}>Count: {count}</button>
+				<button className="btn btn-outline" data-rh="#custom" data-rh-cls="react-hint--custom"
+					data-rh-at="right">Custom</button>
+				</div>
 				<ReactHint />
+
+				<div style={{display: 'none'}} id="custom">
+					Here goes a custom tooltip.<br />
+					You can show <b>HTML</b> content in tooltips.
+					<img src="//placekitten.com/260/100" />
+				</div>
 			</div>
 		)
 	}

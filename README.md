@@ -1,8 +1,10 @@
 react-hint
 ==========
-**react-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It doesn't include any fancy stuff, but it gets the job done. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno) (1.0.0-beta3). [Demo page](https://slmgc.github.io/react-hint/).
+**React-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno). There is a [demo page](https://slmgc.github.io/react-hint/).
 
 ![react-hint tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/react-hint.gif)
+
+![custom tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/custom-tooltip.png)
 
 How to install
 --------------
@@ -12,8 +14,15 @@ npm i -S react-hint
 
 How to use
 ----------
+ReactHint Property|Type|Default Value|Description
+:-|:-|:-|:-
+className|String|react-hint|`<ReactHint />` is a singleton component. You can completely override the default tooltip style by passing `className` property with a new base class name.
 
-`<ReactHint />` is a singleton component. To show a tooltip on any DOM element and its children add `data-rh` attribute to the element. The default placement of a tooltip is at the top, but you can add `data-rh-at` attribute to change the placement. Supported values are: `top`, `left`, `right`, `bottom`. You can completely override tooltip style by passing `className` property to `<ReactHint />`.
+Element Attribute|Type|Default Value|Description
+:-|:-|:-|:-
+data-rh|String or #element-id||To show a tooltip on any DOM element and its children add `data-rh` attribute with a tooltip text to the element. Pass `#element-id` instead of a text to show the element's HTML content.
+data-rh-at|top, left, right, bottom|top|The default placement of a tooltip is at the top, but you can add `data-rh-at` attribute to change the placement.
+data-rh-cls|String||To customize a single tooltip add `data-rh-cls` with a class name which will be added to the tooltip.
 
 ```jsx
 import React from 'react'
@@ -36,12 +45,19 @@ class Demo extends React.Component {
 		return (
 			<div>
 				<button data-rh="Default">Default</button>
-				<button data-rh="Top" data-rh-at="top">Top</button>
 				<button data-rh="Left" data-rh-at="left">Left</button>
-				<button data-rh="Right" data-rh-at="right">Right</button>
+				<button data-rh="Top" data-rh-at="top">Top</button>
 				<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+				<button data-rh="Right" data-rh-at="right">Right</button>
 				<button data-rh={`Count: ${count}`}>Count: {count}</button>
+				<button data-rh="#custom" data-rh-cls="react-hint--custom">Custom</button>
 				<ReactHint />
+
+				<div style={{display: 'none'}} id="custom">
+					Here goes a custom tooltip.<br />
+					You can show <b>HTML</b> content in tooltips.
+					<img src="//placekitten.com/260/100" />
+				</div>
 			</div>
 		)
 	}
