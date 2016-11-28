@@ -14,12 +14,9 @@ npm i -S react-hint
 
 How to use
 ----------
-ReactHint Property|Type|Default Value|Description
+Property/Attribute|Type|Default Value|Description
 :---|:---|:---|:---
 className|String|react-hint|`<ReactHint />` is a singleton component. You can completely override the default tooltip style by passing `className` property with a new base class name.
-
-Element Attribute|Type|Default Value|Description
-:---|:---|:---|:---
 data-rh|String or #element-id||To show a tooltip on any DOM element and its children add `data-rh` attribute with a tooltip text to the element. Pass `#element-id` instead of a text to show the element's HTML content.
 data-rh-at|top, left, right, bottom|top|The default placement of a tooltip is at the top, but you can add `data-rh-at` attribute to change the placement.
 data-rh-cls|String||To customize a single tooltip add `data-rh-cls` with a class name which will be added to the tooltip.
