@@ -11,8 +11,7 @@ export default class ReactHint extends React.Component {
 		if (instance) {
 			document.addEventListener('mouseover', instance.onHover)
 		} else {
-			document.removeEventListener('mouseover',
-				ReactHint.instance.onHover)
+			document.removeEventListener('mouseover', ReactHint.instance.onHover)
 		}
 
 		ReactHint._instance = instance
@@ -24,15 +23,17 @@ export default class ReactHint extends React.Component {
 
 	state = {
 		target: null,
+		content: null,
 		cls: null,
 		at: 'top',
 		top: 0,
 		left: 0
 	}
 
-	shouldComponentUpdate({className}, {target, cls, at, top, left}) {
+	shouldComponentUpdate({className}, {target, content, cls, at, top, left}) {
 		const {props, state} = this
 		return target !== state.target
+			|| content !== state.content
 			|| cls !== state.cls
 			|| at !== state.at
 			|| top !== state.top
@@ -52,7 +53,7 @@ export default class ReactHint extends React.Component {
 		const {top, left, width, height} = target.getBoundingClientRect()
 		if (!(top || left || width || height)) return
 
-		this.setState(this.getPosition(target))
+		this.setState(this.getHintData(target))
 	}
 
 	componentWillUnmount() {
@@ -68,8 +69,11 @@ export default class ReactHint extends React.Component {
 		} return null
 	}
 
-	getPosition = (target) => {
+	getHintData = (target) => {
 		const {_container, _hint} = this
+		const content = target.getAttribute('data-rh')
+		const cls = target.getAttribute('data-rh-cls')
+		const at = target.getAttribute('data-rh-at') || 'top'
 
 		const {
 			top: container_top,
@@ -89,8 +93,6 @@ export default class ReactHint extends React.Component {
 		} = target.getBoundingClientRect()
 
 		let top, left
-		const at = target.getAttribute('data-rh-at') || 'top'
-
 		switch (at) {
 			case 'left':
 				top = target_height - hint_height >> 1
@@ -114,7 +116,7 @@ export default class ReactHint extends React.Component {
 		}
 
 		return {
-			at,
+			content, cls, at,
 			top: top + target_top - container_top,
 			left: left + target_left - container_left
 		}
@@ -124,28 +126,23 @@ export default class ReactHint extends React.Component {
 		clearTimeout(this.timeout)
 		this.timeout = setTimeout(() => {
 			target = this.findHint(target)
-			const cls = target ? target.getAttribute('data-rh-cls') : null
-			this.setState({target, cls})
+			this.setState({target})
 		}, 100)
 	}
 
 	setRef = (name, ref) =>
 		this[name] = ref
 
-	renderContent = (target) => {
-		const text = target.getAttribute('data-rh')
-
-		if (text[0] === '#') {
-			const el = document.getElementById(text.slice(1))
+	renderContent = (content) => {
+		if (content && content[0] === '#') {
+			const el = document.getElementById(content.slice(1))
 			if (el) return <span dangerouslySetInnerHTML={{__html: el.innerHTML}} />
-		}
-
-		return text
+		} return content
 	}
 
 	render() {
 		const {className} = this.props
-		const {target, cls, at, top, left} = this.state
+		const {target, content, cls, at, top, left} = this.state
 
 		return (
 			<div style={{position: 'relative'}}
@@ -155,7 +152,7 @@ export default class ReactHint extends React.Component {
 							ref={this.setRef.bind(this, '_hint')}
 							style={{top, left}}>
 								<div className={`${className}__content`}>
-									{this.renderContent(target)}
+									{this.renderContent(content)}
 								</div>
 						</div>
 					}
