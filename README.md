@@ -1,4 +1,4 @@
-react-hint
+React-hint
 ==========
 **React-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno). There is a [demo page](https://slmgc.github.io/react-hint/).
 
@@ -65,7 +65,7 @@ render(<Demo />, document.getElementById('demo'))
 
 How to rerender
 ---------------
-**react-hint** uses [shouldComponentUpdate](https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate) under the hood to decide if it needs to be updated. You can use `ReactHint.instance.forceUpdate()` in case you want to force an update.
+**React-hint** uses [shouldComponentUpdate](https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate) under the hood to decide if it needs to be updated. You can use `ReactHint.instance.forceUpdate()` in case you want to force an update.
 
 License
 -------
