@@ -9,10 +9,6 @@ React-hint
 
 ![custom tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/custom-tooltip.png)
 
-License
--------
-MIT
-
 How to install
 --------------
 ```
@@ -82,6 +78,10 @@ class App extends Component {
 
 render(<App />, demo)
 ```
+
+License
+-------
+MIT
 
 [npm-badge]: https://img.shields.io/npm/v/react-hint.png
 [npm]: https://www.npmjs.org/package/react-hint
