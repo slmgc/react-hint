@@ -26,7 +26,7 @@ delay|Number|0|The default delay before showing a tooltip.
 events|Boolean|false|Enables/disables `mouseOver` events. Disabling events is useful in case you want to trigger a tooltip programmatically.
 hover|Boolean|false|Enables to hover a mouse cursor over a tooltip.
 position|"top", "left", "right", "bottom"|"top"|Allows to customize a default placement of tooltips.
-ref|function||You can get a reference to an instance by passing a function which will set it for you, e.g. `<ReactHint ref={(ref) => this.instance = ref} />`. This might be needed to programmatically trigger a tooltip by calling `this.instance.setState({target})` or update it's content by calling `this.instance.forceUpdate()`.
+ref|Function||You can get a reference to an instance by passing a function which will set it for you, e.g. `<ReactHint ref={(ref) => this.instance = ref} />`. This might be needed to programmatically trigger a tooltip by calling `this.instance.setState({target})` or update it's content by calling `this.instance.forceUpdate()`.
 
 DOM Element Attribute|Type|Default Value|Description
 :---|:---|:---|:---
