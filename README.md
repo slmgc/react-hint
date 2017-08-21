@@ -1,10 +1,17 @@
 React-hint
 ==========
-**React-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno). There is a [demo page](https://slmgc.github.io/react-hint/).
+
+[![npm package][npm-badge]][npm]
+
+**React-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno).
 
 ![react-hint tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/react-hint.gif)
 
 ![custom tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/custom-tooltip.png)
+
+License
+-------
+MIT
 
 How to install
 --------------
@@ -14,59 +21,67 @@ npm i -S react-hint
 
 How to use
 ----------
-Property/Attribute|Type|Default Value|Description
+
+ReactHint Property|Type|Default Value|Description
 :---|:---|:---|:---
-className|String|react-hint|`<ReactHint />` is a singleton component. You can completely override the default tooltip style by passing `className` property with a new base class name.
+attribute|String|"data-rh"|Allows to set a custom tooltip attribute instead of a default `data-rh`.
+className|String|"react-hint"|You can completely override a tooltip style by passing a `className` property.
+delay|Number|0|The default delay before showing a tooltip.
+events|Boolean|false|Enables/disables `mouseOver` events. Disabling events is useful in case you want to trigger a tooltip programmatically.
+hover|Boolean|false|Enables to hover a mouse cursor over a tooltip.
+position|"top", "left", "right", "bottom"|"top"|Allows to customize a default placement of tooltips.
+ref|function||You can get a reference to an instance by passing a function which will set it for you, e.g. `<ReactHint ref={(ref) => this.instance = ref} />`. This might be needed to programmatically trigger a tooltip by calling `this.instance.setState({target})` or update it's content by calling `this.instance.forceUpdate()`.
+
+DOM Element Attribute|Type|Default Value|Description
+:---|:---|:---|:---
 data-rh|String or #element-id||To show a tooltip on any DOM element and its children add `data-rh` attribute with a tooltip text to the element. Pass `#element-id` instead of a text to show the element's HTML content.
-data-rh-at|top, left, right, bottom|top|The default placement of a tooltip is at the top, but you can add `data-rh-at` attribute to change the placement.
-data-rh-cls|String||To customize a single tooltip add `data-rh-cls` with a class name which will be added to the tooltip.
+data-rh-at|"top", "left", "right", "bottom"|"top"|Allows overriding the default tooltip placement.
+
 
 ```jsx
 import React from 'react'
 import {render} from 'react-dom'
-import ReactHint from 'react-hint'
+import {ReactHintFactory} from 'react-hint'
 import 'react-hint/css/index.css'
 
-class Demo extends React.Component {
-	state = {count: 0}
+// You can pass any object which contains
+// `createElement` & `Component` properties.
+// This allows you to pass Inferno/Preact in
+// compatibility mode.
+const ReactHint = ReactHintFactory(React)
 
-	componentDidMount() {
-		setInterval(() => {
-			this.setState({count: this.state.count + 1})
-			ReactHint.instance.forceUpdate()
-		}, 1000)
+class App extends Component {
+	toggleCustomHint = ({target}) => {
+		if (this.instance.state.target) target = null
+		this.instance.setState({target})
 	}
 
 	render() {
-		const {count} = this.state
-		return (
-			<div>
-				<button data-rh="Default">Default</button>
-				<button data-rh="Left" data-rh-at="left">Left</button>
-				<button data-rh="Top" data-rh-at="top">Top</button>
-				<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>
-				<button data-rh="Right" data-rh-at="right">Right</button>
-				<button data-rh={`Count: ${count}`}>Count: {count}</button>
-				<button data-rh="#custom" data-rh-cls="react-hint--custom">Custom</button>
-				<ReactHint />
+		return <div>
+			<ReactHint events delay={100} />
+			<ReactHint attribute="data-custom" className="custom-hint"
+				ref={(ref) => this.instance = ref} />
 
-				<div style={{display: 'none'}} id="custom">
-					Here goes a custom tooltip.<br />
-					You can show <b>HTML</b> content in tooltips.
-					<img src="//placekitten.com/260/100" />
-				</div>
+			<button data-rh="Default">Default</button>
+			<button data-rh="Top" data-rh-at="top">Top</button>
+			<button data-rh="Right" data-rh-at="right">Right</button>
+			<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+			<button data-rh="Left" data-rh-at="left">Left</button>
+			<button data-custom="#content" data-custom-at="bottom"
+				onClick={this.toggleCustomHint}>Click Me</button>
+
+			<div id="content" style={{display: 'none'}}>
+				Here goes a custom tooltip.<br />
+				You can show <b>HTML</b> content in tooltips.<br />
+				<img data-rh="Cat" data-rh-at="bottom"
+					src="https://images.pexels.com/photos/20787/pexels-photo.jpg?w=240" />
 			</div>
-		)
+		</div>
 	}
 }
 
-render(<Demo />, document.getElementById('demo'))
+render(<App />, demo)
 ```
 
-How to rerender
----------------
-**React-hint** uses [shouldComponentUpdate](https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate) under the hood to decide if it needs to be updated. You can use `ReactHint.instance.forceUpdate()` in case you want to force an update.
-
-License
--------
-MIT
+[npm-badge]: https://img.shields.io/npm/v/react-hint.png
+[npm]: https://www.npmjs.org/package/react-hint

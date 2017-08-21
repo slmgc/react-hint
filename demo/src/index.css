@@ -1,50 +1,28 @@
-html, body {
-	height: 100%;
-	padding: 0;
-	margin: 0;
-}
-
 body {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 14px;
+	padding: 80px;
 }
 
-#demo {
-	width: 100%;
-	height: 100%;
-	display: table;
-}
-
-.centered {
-	width: 100%;
-	height: 100%;
-	display: table-cell;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.btn {
+button {
 	margin: 5px;
 }
 
-.react-hint {
-	text-align: initial;
+.custom-hint {
+	position: absolute;
+	z-index: 8888;
+	cursor: default;
 }
 
-.react-hint--custom .react-hint__content {
-	background: ivory;
-	color: #000;
-	box-shadow: 0px 0px 2px 1px rgba(0,0,0,.5);
-	border-radius: 0;
-	border: 0;
-}
-
-.react-hint--custom:after {
-	display: none;
-}
-
-.react-hint--custom img {
+.custom-hint img {
 	display: block;
 	margin-top: 10px;
-	width: 100%;
+}
+
+.custom-hint__content {
+	margin: 10px;
+	padding: 10px;
+	box-shadow: 0 0 5px rgba(0,0,0,.5);
+	background: floralwhite;
+	color: #000;
 }

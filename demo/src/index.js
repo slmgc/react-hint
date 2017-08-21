@@ -1,41 +1,36 @@
-import React from 'react'
-import {render} from 'react-dom'
-import ReactHint from 'react-hint'
-import 'primer-buttons/build/build.css'
-import 'react-hint/css/index.css'
+import {ReactHintFactory} from 'src'
+import 'css/index.css'
 import './index.css'
 
-class Demo extends React.Component {
-	state = {count: 0}
-
-	componentDidMount() {
-		setInterval(() => {
-			this.setState({count: this.state.count + 1})
-			ReactHint.instance.forceUpdate()
-		}, 1000)
+const ReactHint = ReactHintFactory(React)
+class App extends Component {
+	toggleCustomHint = ({target}) => {
+		if (this.instance.state.target) target = null
+		this.instance.setState({target})
 	}
 
 	render() {
-		const {count} = this.state
-		return (
-			<div className="centered">
-				<button className="btn" data-rh="Default">Default</button>
-				<button className="btn" data-rh="Left" data-rh-at="left">Left</button>
-				<button className="btn" data-rh="Top" data-rh-at="top">Top</button>
-				<button className="btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
-				<button className="btn" data-rh="Right" data-rh-at="right">Right</button>
-				<button className="btn" data-rh={`Count: ${count}`}>Count: {count}</button>
-				<button className="btn" data-rh="#custom" data-rh-cls="react-hint--custom">Custom</button>
-				<ReactHint />
+		return <div>
+			<ReactHint events delay={100} />
+			<ReactHint attribute="data-custom" className="custom-hint"
+				ref={(ref) => this.instance = ref} />
 
-				<div style={{display: 'none'}} id="custom">
-					Here goes a custom tooltip.<br />
-					You can show <b>HTML</b> content in tooltips.
-					<img src="//placekitten.com/260/100" />
-				</div>
+			<button data-rh="Default">Default</button>
+			<button data-rh="Top" data-rh-at="top">Top</button>
+			<button data-rh="Right" data-rh-at="right">Right</button>
+			<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+			<button data-rh="Left" data-rh-at="left">Left</button>
+			<button data-custom="#content" data-custom-at="bottom"
+				onClick={this.toggleCustomHint}>Click Me</button>
+
+			<div id="content" style={{display: 'none'}}>
+				Here goes a custom tooltip.<br />
+				You can show <b>HTML</b> content in tooltips.
+				<img data-rh="Cat" data-rh-at="bottom"
+					src="https://images.pexels.com/photos/20787/pexels-photo.jpg?w=240" />
 			</div>
-		)
+		</div>
 	}
 }
 
-render(<Demo />, document.getElementById('demo'))
+render(<App />, demo)

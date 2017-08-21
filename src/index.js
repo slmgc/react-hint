@@ -1,162 +1,150 @@
-import React from 'react'
+export const ReactHintFactory = ({Component, createElement}) => {
+	class ReactHint extends Component {
+		constructor(...args) {
+			super(...args)
+			this.state = {target: null}
 
-export default class ReactHint extends React.Component {
-	static _instance = null
-
-	static get instance() {
-		return ReactHint._instance
-	}
-
-	static set instance(instance) {
-		if (instance) {
-			document.addEventListener('mouseover', instance.onHover)
-		} else {
-			document.removeEventListener('mouseover', ReactHint.instance.onHover)
+			this.shouldComponentUpdate = this.shouldComponentUpdate.bind(this)
+			this.shallowEqual = this.shallowEqual.bind(this)
+			this.findHint = this.findHint.bind(this)
+			this.getHintData = this.getHintData.bind(this)
+			this.mouseOver = this.mouseOver.bind(this)
+			this.renderContent = this.renderContent.bind(this)
 		}
 
-		ReactHint._instance = instance
-	}
-
-	static defaultProps = {
-		className: 'react-hint'
-	}
-
-	state = {
-		target: null,
-		content: null,
-		cls: null,
-		at: 'top',
-		top: 0,
-		left: 0
-	}
-
-	shouldComponentUpdate({className}, {target, content, cls, at, top, left}) {
-		const {props, state} = this
-		return target !== state.target
-			|| content !== state.content
-			|| cls !== state.cls
-			|| at !== state.at
-			|| top !== state.top
-			|| left !== state.left
-			|| className !== props.className
-	}
-
-	componentDidMount() {
-		if (ReactHint.instance) ReactHint.instance = null
-		ReactHint.instance = this
-	}
-
-	componentDidUpdate() {
-		const {target} = this.state
-		if (!target) return
-
-		const {top, left, width, height} = target.getBoundingClientRect()
-		if (!(top || left || width || height)) return
-
-		this.setState(this.getHintData(target))
-	}
-
-	componentWillUnmount() {
-		ReactHint.instance = null
-	}
-
-	findHint = (el) => {
-		while (el) {
-			if (el === document) break
-			if (el.hasAttribute('data-rh')) return el
-			if (el === this._hint) return this.state.target
-			el = el.parentNode
-		} return null
-	}
-
-	getHintData = (target) => {
-		const {_container, _hint} = this
-		const content = target.getAttribute('data-rh')
-		const cls = target.getAttribute('data-rh-cls')
-		const at = target.getAttribute('data-rh-at') || 'top'
-
-		const {
-			top: container_top,
-			left: container_left,
-		} = _container.getBoundingClientRect()
-
-		const {
-			width: hint_width,
-			height: hint_height,
-		} = _hint.getBoundingClientRect()
-
-		const {
-			top: target_top,
-			left: target_left,
-			width: target_width,
-			height: target_height,
-		} = target.getBoundingClientRect()
-
-		let top, left
-		switch (at) {
-			case 'left':
-				top = target_height - hint_height >> 1
-				left = -hint_width
-				break
-
-			case 'right':
-				top = target_height - hint_height >> 1
-				left = target_width
-				break
-
-			case 'bottom':
-				top = target_height
-				left = target_width - hint_width >> 1
-				break
-
-			case 'top':
-			default:
-				top = -hint_height
-				left = target_width - hint_width >> 1
+		componentDidMount() {
+			document.addEventListener('mouseover', this.mouseOver)
 		}
 
-		return {
-			content, cls, at,
-			top: top + target_top - container_top,
-			left: left + target_left - container_left
+		componentWillUnmount() {
+			document.removeEventListener('mouseover', this.mouseOver)
+			clearTimeout(this._timeout)
+		}
+
+		shouldComponentUpdate(props, state) {
+			return !this.shallowEqual(state, this.state) ||
+				!this.shallowEqual(props, this.props)
+		}
+
+		shallowEqual(a, b) {
+			const keys = Object.keys(a)
+			return keys.length === Object.keys(b).length &&
+				keys.reduce((result, key) => result &&
+					(typeof a[key] === 'function' || a[key] === b[key]), true)
+		}
+
+		componentDidUpdate() {
+			if (this.state.target) this.setState(this.getHintData)
+		}
+
+		findHint(el) {
+			const {attribute, hover} = this.props
+			const {target} = this.state
+
+			while (el) {
+				if (el === document) break
+				if (hover && el === this._hint) return target
+				if (el.hasAttribute(attribute)) return el
+				el = el.parentNode
+			} return null
+		}
+
+		getHintData({target}, {attribute, position}) {
+			const content = target.getAttribute(attribute) || ''
+			const at = target.getAttribute(`${attribute}-at`) || position
+
+			const {
+				top: containerTop,
+				left: containerLeft
+			} = this._container.getBoundingClientRect()
+
+			const {
+				width: hintWidth,
+				height: hintHeight
+			} = this._hint.getBoundingClientRect()
+
+			const {
+				top: targetTop,
+				left: targetLeft,
+				width: targetWidth,
+				height: targetHeight
+			} = target.getBoundingClientRect()
+
+			let top, left
+			switch (at) {
+				case 'left':
+					top = targetHeight - hintHeight >> 1
+					left = -hintWidth
+					break
+
+				case 'right':
+					top = targetHeight - hintHeight >> 1
+					left = targetWidth
+					break
+
+				case 'bottom':
+					top = targetHeight
+					left = targetWidth - hintWidth >> 1
+					break
+
+				case 'top':
+				default:
+					top = -hintHeight
+					left = targetWidth - hintWidth >> 1
+			}
+
+			return {
+				content, at,
+				top: top + targetTop - containerTop,
+				left: left + targetLeft - containerLeft
+			}
+		}
+
+		mouseOver({target}) {
+			const {delay, events} = this.props
+			if (!events) return
+
+			clearTimeout(this._timeout)
+			this._timeout = setTimeout(() => this.setState(() => ({
+				target: this.findHint(target)
+			})), delay)
+		}
+
+		renderContent(content) {
+			if (String(content)[0] === '#') {
+				const el = document.getElementById(content.slice(1))
+				if (el) return createElement('div', {
+					dangerouslySetInnerHTML: {__html: el.innerHTML}
+				})
+			} return content
+		}
+
+		render() {
+			const {className} = this.props
+			const {target, content, at, top, left} = this.state
+
+			return createElement('div', {
+					ref: (ref) => this._container = ref,
+					style: {position: 'relative'},
+				}, target && createElement('div', {
+					className: `${className} ${className}--${at}`,
+					ref: (ref) => this._hint = ref,
+					style: {top, left}
+				}, createElement('div', {
+					className: `${className}__content`
+				}, this.renderContent(content)))
+			)
 		}
 	}
 
-	onHover = ({target}) => {
-		clearTimeout(this.timeout)
-		this.timeout = setTimeout(() => {
-			target = this.findHint(target)
-			this.setState({target})
-		}, 100)
+	ReactHint.defaultProps = {
+		attribute: 'data-rh',
+		className: 'react-hint',
+		delay: 0,
+		events: false,
+		hover: false,
+		position: 'top'
 	}
 
-	setRef = (name, ref) =>
-		this[name] = ref
-
-	renderContent = (content) => {
-		if (content && content[0] === '#') {
-			const el = document.getElementById(content.slice(1))
-			if (el) return <span dangerouslySetInnerHTML={{__html: el.innerHTML}} />
-		} return content
-	}
-
-	render() {
-		const {className} = this.props
-		const {target, content, cls, at, top, left} = this.state
-
-		return (
-			<div style={{position: 'relative'}}
-				ref={this.setRef.bind(this, '_container')}>
-					{target &&
-						<div className={`${className} ${className}--${at} ${cls}`}
-							ref={this.setRef.bind(this, '_hint')}
-							style={{top, left}}>
-								<div className={`${className}__content`}>
-									{this.renderContent(content)}
-								</div>
-						</div>
-					}
-			</div>
-		)
-	}
+	return ReactHint
 }

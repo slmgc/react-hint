@@ -3,8 +3,7 @@
 	position: absolute;
 	z-index: 9999;
 	cursor: default;
-	-webkit-animation: .5s fadeIn;
-	        animation: .5s fadeIn;
+	animation: .5s fadeIn;
 }
 
 .react-hint__content {
@@ -50,16 +49,6 @@
 	bottom: auto;
 	border-top: none;
 	border-bottom-color: #000;
-}
-
-@-webkit-keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
 }
 
 @keyframes fadeIn {

@@ -1,27 +1,23 @@
 {
   "name": "react-hint",
-  "version": "1.3.1",
+  "version": "2.0.0",
+  "license": "MIT",
   "description": "Tooltip component for React, Preact, Inferno",
   "author": "Vladimir Simonov <slmgc@ya.ru>",
-  "homepage": "https://github.com/slmgc/react-hint",
+  "homepage": "https://react-hint.js.org",
   "repository": "slmgc/react-hint",
-  "license": "MIT",
-  "main": "lib",
-  "jsnext:main": "src",
-  "style": "css/index.css",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "jsnext:main": "src/index.js",
   "scripts": {
-    "build": "npm run build:css && npm run build:js",
-    "build:css": "postcss --use autoprefixer src/css/*.css -d css",
-    "build:js": "nwb build-react-component",
-    "start": "nwb serve-react-demo --port 8080"
+    "build": "nwb build",
+    "clean": "nwb clean",
+    "start": "nwb serve --no-clear --port 8080 --reload"
   },
   "devDependencies": {
-    "autoprefixer": "6.x",
-    "nwb": "0.12.x",
-    "postcss-cli": "2.x",
-    "primer-buttons": "*",
-    "react": ">=0.14",
-    "react-dom": ">=0.14"
+    "nwb": "0.18.x",
+    "react": "15.x",
+    "react-dom": "15.x"
   },
   "files": [
     "css",
@@ -30,11 +26,13 @@
     "umd"
   ],
   "keywords": [
-    "tooltip",
-    "react",
-    "react-tooltip",
-    "react-component",
-    "preact",
-    "inferno"
+      "hint",
+      "inferno",
+      "preact",
+      "react",
+      "react-component",
+      "react-hint",
+      "react-tooltip",
+      "tooltip"
   ]
 }
