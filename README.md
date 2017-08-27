@@ -1,7 +1,7 @@
 React-hint
 ==========
 
-[![npm package][npm-badge]][npm]
+[![npm package][npm-badge]][npm] [![npm package][npm-downloads]][npm]
 
 **React-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno).
 
@@ -84,4 +84,5 @@ License
 MIT
 
 [npm-badge]: https://img.shields.io/npm/v/react-hint.png
+[npm-downloads]: https://img.shields.io/npm/dm/react-hint.svg
 [npm]: https://www.npmjs.org/package/react-hint
