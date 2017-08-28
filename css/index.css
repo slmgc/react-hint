@@ -4,6 +4,7 @@
 	z-index: 9999;
 	cursor: default;
 	animation: .5s fadeIn;
+	pointer-events: none;
 }
 
 .react-hint__content {
