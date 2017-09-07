@@ -1,16 +1,15 @@
-export const ReactHintFactory = ({Component, createElement}) => {
+export const ReactHintFactory = ({Component, createElement}) =>
 	class ReactHint extends Component {
-		constructor(...args) {
-			super(...args)
-			this.state = {target: null}
-
-			this.shouldComponentUpdate = this.shouldComponentUpdate.bind(this)
-			this.shallowEqual = this.shallowEqual.bind(this)
-			this.findHint = this.findHint.bind(this)
-			this.getHintData = this.getHintData.bind(this)
-			this.mouseOver = this.mouseOver.bind(this)
-			this.renderContent = this.renderContent.bind(this)
+		static defaultProps = {
+			attribute: 'data-rh',
+			className: 'react-hint',
+			delay: 0,
+			events: false,
+			hover: false,
+			position: 'top'
 		}
+
+		state = {target: null}
 
 		componentDidMount() {
 			document.addEventListener('mouseover', this.mouseOver)
@@ -21,12 +20,11 @@ export const ReactHintFactory = ({Component, createElement}) => {
 			clearTimeout(this._timeout)
 		}
 
-		shouldComponentUpdate(props, state) {
-			return !this.shallowEqual(state, this.state) ||
+		shouldComponentUpdate = (props, state) =>
+			!this.shallowEqual(state, this.state) ||
 				!this.shallowEqual(props, this.props)
-		}
 
-		shallowEqual(a, b) {
+		shallowEqual = (a, b) => {
 			const keys = Object.keys(a)
 			return keys.length === Object.keys(b).length &&
 				keys.reduce((result, key) => result &&
@@ -37,7 +35,7 @@ export const ReactHintFactory = ({Component, createElement}) => {
 			if (this.state.target) this.setState(this.getHintData)
 		}
 
-		findHint(el) {
+		findHint = (el) => {
 			const {attribute, hover} = this.props
 			const {target} = this.state
 
@@ -49,7 +47,7 @@ export const ReactHintFactory = ({Component, createElement}) => {
 			} return null
 		}
 
-		getHintData({target}, {attribute, position}) {
+		getHintData = ({target}, {attribute, position}) => {
 			const content = target.getAttribute(attribute) || ''
 			const at = target.getAttribute(`${attribute}-at`) || position
 
@@ -100,7 +98,7 @@ export const ReactHintFactory = ({Component, createElement}) => {
 			}
 		}
 
-		mouseOver({target}) {
+		mouseOver = ({target}) => {
 			const {delay, events} = this.props
 			if (!events) return
 
@@ -110,7 +108,7 @@ export const ReactHintFactory = ({Component, createElement}) => {
 			})), delay)
 		}
 
-		renderContent(content) {
+		renderContent = (content) => {
 			if (String(content)[0] === '#') {
 				const el = document.getElementById(content.slice(1))
 				if (el) return createElement('div', {
@@ -136,15 +134,3 @@ export const ReactHintFactory = ({Component, createElement}) => {
 			)
 		}
 	}
-
-	ReactHint.defaultProps = {
-		attribute: 'data-rh',
-		className: 'react-hint',
-		delay: 0,
-		events: false,
-		hover: false,
-		position: 'top'
-	}
-
-	return ReactHint
-}

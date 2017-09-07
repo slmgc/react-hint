@@ -1,3 +1,6 @@
+## 2.0.2 (Sep 6, 2017)
+* #9: Fix production build in create-react-app
+
 ## 2.0.1 (Aug 21, 2017)
 * Add missing build artefacts
 

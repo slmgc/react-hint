@@ -1,14 +1,12 @@
 {
   "name": "react-hint",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "MIT",
   "description": "Tooltip component for React, Preact, Inferno",
   "author": "Vladimir Simonov <slmgc@ya.ru>",
   "homepage": "https://react-hint.js.org",
   "repository": "slmgc/react-hint",
   "main": "lib/index.js",
-  "module": "src/index.js",
-  "jsnext:main": "src/index.js",
   "scripts": {
     "build": "nwb build",
     "clean": "nwb clean",
