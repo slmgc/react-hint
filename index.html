@@ -25,13 +25,12 @@
       <p><strong>React-hint</strong> is a small tooltip component for <a href="https://github.com/facebook/react">React</a> which is developed with simplicity and performance in mind. It also plays nicely with <a href="https://github.com/developit/preact">Preact</a> and <a href="https://github.com/trueadm/inferno">Inferno</a>.</p>
 
       <p>
-        <div id="react"></div>
+        <div id="demo"></div>
         <button class="btn" data-rh="Default">Default</button>
         <button class="btn" data-rh="Top" data-rh-at="top">Top</button>
         <button class="btn" data-rh="Left" data-rh-at="left">Left</button>
         <button class="btn" data-rh="Right" data-rh-at="right">Right</button>
         <button class="btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
-        <button class="btn btn-outline" data-rh="#custom" data-rh-cls="react-hint--custom">Custom</button>
         <div style="display: none" id="custom">
           Here goes a custom tooltip.<br />
           You can show <b>HTML</b> content in tooltips.
@@ -131,7 +130,10 @@
 
     <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
     <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
-    <script src="https://unpkg.com/react-hint@1/umd/react-hint.min.js"></script>
-    <script>ReactDOM.render(React.createElement(ReactHint.default, null), react)</script>
+    <script src="https://unpkg.com/react-hint@2/umd/react-hint.min.js"></script>
+    <script>
+      const ReactHint = ReactHintFactory.ReactHintFactory(React)
+      ReactDOM.render(React.createElement(ReactHint, {events: true, delay: 100}), demo)
+    </script>
   </body>
 </html>
