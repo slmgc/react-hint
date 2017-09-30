@@ -1,5 +1,5 @@
 /*!
- * react-hint v2.0.2 - https://react-hint.js.org
+ * react-hint v2.0.3 - https://react-hint.js.org
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -213,10 +213,12 @@ var ReactHintFactory = function ReactHintFactory(_ref) {
 
 		ReactHint.prototype.componentDidMount = function componentDidMount() {
 			document.addEventListener('mouseover', this.mouseOver);
+			document.addEventListener('touchstart', this.mouseOver);
 		};
 
 		ReactHint.prototype.componentWillUnmount = function componentWillUnmount() {
 			document.removeEventListener('mouseover', this.mouseOver);
+			document.removeEventListener('touchstart', this.mouseOver);
 			clearTimeout(this._timeout);
 		};
 

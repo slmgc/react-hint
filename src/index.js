@@ -13,10 +13,12 @@ export const ReactHintFactory = ({Component, createElement}) =>
 
 		componentDidMount() {
 			document.addEventListener('mouseover', this.mouseOver)
+			document.addEventListener('touchstart', this.mouseOver)
 		}
 
 		componentWillUnmount() {
 			document.removeEventListener('mouseover', this.mouseOver)
+			document.removeEventListener('touchstart', this.mouseOver)
 			clearTimeout(this._timeout)
 		}
 
