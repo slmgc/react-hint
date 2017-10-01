@@ -1,3 +1,6 @@
+## 2.0.3 (Sep 30, 2017)
+* #12: Fix iOS mouseover
+
 ## 2.0.2 (Sep 6, 2017)
 * #9: Fix production build in create-react-app
 
