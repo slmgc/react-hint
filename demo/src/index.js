@@ -1,18 +1,31 @@
-import {ReactHintFactory} from 'src'
+import React from 'react'
+import {render} from 'react-dom'
+import ReactHintFactory from 'src'
 import 'css/index.css'
 import './index.css'
 
 const ReactHint = ReactHintFactory(React)
-class App extends Component {
-	toggleCustomHint = ({target}) => {
-		if (this.instance.state.target) target = null
-		this.instance.setState({target})
+class App extends React.Component {
+	onRenderContent = (target, content) => {
+		const {catId} = target.dataset
+		const width = 240
+		const url = `https://images.pexels.com/photos/${catId}/pexels-photo-${catId}.jpeg?w=${width}`
+
+		return <div className="custom-hint__content">
+			<img src={url} width={width} />
+			<button ref={(ref) => ref && ref.focus()}
+				onClick={() => this.instance.toggleHint()}>Ok</button>
+		</div>
 	}
 
 	render() {
 		return <div>
 			<ReactHint events delay={100} />
-			<ReactHint attribute="data-custom" className="custom-hint"
+			<ReactHint persist
+				attribute="data-custom"
+				className="custom-hint"
+				events={{click: true}}
+				onRenderContent={this.onRenderContent}
 				ref={(ref) => this.instance = ref} />
 
 			<button data-rh="Default">Default</button>
@@ -20,15 +33,14 @@ class App extends Component {
 			<button data-rh="Right" data-rh-at="right">Right</button>
 			<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>
 			<button data-rh="Left" data-rh-at="left">Left</button>
-			<button data-custom="#content" data-custom-at="bottom"
-				onClick={this.toggleCustomHint}>Click Me</button>
 
-			<div id="content" style={{display: 'none'}}>
-				Here goes a custom tooltip.<br />
-				You can show <b>HTML</b> content in tooltips.
-				<img data-rh="Cat" data-rh-at="bottom"
-					src="https://images.pexels.com/photos/20787/pexels-photo.jpg?w=240" />
-			</div>
+			<button data-custom
+				data-custom-at="bottom"
+				data-cat-id="10913">Click</button>
+
+			<button data-custom
+				data-custom-at="bottom"
+				data-cat-id="416088">Click</button>
 		</div>
 	}
 }

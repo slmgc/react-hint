@@ -5,7 +5,14 @@ module.exports = (nwb) => ({
 	npm: {
 		cjs: true,
 		esModules: false,
-		umd: 'ReactHintFactory'
+		umd: 'ReactHint'
+	},
+	babel: {
+		plugins: [
+			['transform-react-jsx', {
+				pragma: 'createElement'
+			}]
+		]
 	},
 	webpack: {
 		aliases: {
@@ -15,9 +22,7 @@ module.exports = (nwb) => ({
 		extra: {
 			plugins: [
 				new nwb.webpack.ProvidePlugin({
-					Component: ['react', 'Component'],
-					React: 'react',
-					render: ['react-dom', 'render']
+					createElement: ['react', 'createElement']
 				})
 			]
 		}

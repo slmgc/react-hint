@@ -1,52 +1,72 @@
-export const ReactHintFactory = ({Component, createElement}) =>
+export default ({Component, createElement}) =>
 	class ReactHint extends Component {
 		static defaultProps = {
 			attribute: 'data-rh',
 			className: 'react-hint',
 			delay: 0,
 			events: false,
-			hover: false,
+			onRenderContent: null,
+			persist: false,
 			position: 'top'
 		}
 
 		state = {target: null}
+		_containerStyle = {position: 'relative'}
 
 		componentDidMount() {
-			document.addEventListener('mouseover', this.mouseOver)
-			document.addEventListener('touchstart', this.mouseOver)
+			this.toggleEvents(this.props, true)
 		}
 
 		componentWillUnmount() {
-			document.removeEventListener('mouseover', this.mouseOver)
-			document.removeEventListener('touchstart', this.mouseOver)
+			this.toggleEvents(this.props, false)
 			clearTimeout(this._timeout)
 		}
 
-		shouldComponentUpdate = (props, state) =>
-			!this.shallowEqual(state, this.state) ||
+		toggleEvents = ({events, events: {click, focus, hover}}, flag) => {
+			const action = flag ? 'addEventListener' : 'removeEventListener'
+			const hasEvents = events === true
+
+			;(click || hasEvents) && document[action]('click', this.toggleHint)
+			;(focus || hasEvents) && document[action]('focusin', this.toggleHint)
+			;(hover || hasEvents) && document[action]('mouseover', this.toggleHint)
+			;(click || hover || hasEvents) && document[action]('touchend', this.toggleHint)
+		}
+
+		toggleHint = ({target = null} = {}) => {
+			clearTimeout(this._timeout)
+			this._timeout = setTimeout(() => this.setState(() => ({
+				target: this.getHint(target)
+			})), this.props.delay)
+		}
+
+		getHint = (el) => {
+			const {attribute, persist} = this.props
+			const {target} = this.state
+
+			while (el) {
+				if (el === document) break
+				if (persist && el === this._hint) return target
+				if (el.hasAttribute(attribute)) return el
+				el = el.parentNode
+			} return null
+		}
+
+		shouldComponentUpdate(props, state) {
+			return !this.shallowEqual(state, this.state) ||
 				!this.shallowEqual(props, this.props)
+		}
 
 		shallowEqual = (a, b) => {
 			const keys = Object.keys(a)
 			return keys.length === Object.keys(b).length &&
 				keys.reduce((result, key) => result &&
-					(typeof a[key] === 'function' || a[key] === b[key]), true)
+					((typeof a[key] === 'function' &&
+						typeof b[key] === 'function') ||
+							a[key] === b[key]), true)
 		}
 
 		componentDidUpdate() {
 			if (this.state.target) this.setState(this.getHintData)
-		}
-
-		findHint = (el) => {
-			const {attribute, hover} = this.props
-			const {target} = this.state
-
-			while (el) {
-				if (el === document) break
-				if (hover && el === this._hint) return target
-				if (el.hasAttribute(attribute)) return el
-				el = el.parentNode
-			} return null
 		}
 
 		getHintData = ({target}, {attribute, position}) => {
@@ -100,39 +120,24 @@ export const ReactHintFactory = ({Component, createElement}) =>
 			}
 		}
 
-		mouseOver = ({target}) => {
-			const {delay, events} = this.props
-			if (!events) return
-
-			clearTimeout(this._timeout)
-			this._timeout = setTimeout(() => this.setState(() => ({
-				target: this.findHint(target)
-			})), delay)
-		}
-
-		renderContent = (content) => {
-			if (String(content)[0] === '#') {
-				const el = document.getElementById(content.slice(1))
-				if (el) return createElement('div', {
-					dangerouslySetInnerHTML: {__html: el.innerHTML}
-				})
-			} return content
-		}
-
 		render() {
-			const {className} = this.props
+			const {className, onRenderContent} = this.props
 			const {target, content, at, top, left} = this.state
 
-			return createElement('div', {
-					ref: (ref) => this._container = ref,
-					style: {position: 'relative'},
-				}, target && createElement('div', {
-					className: `${className} ${className}--${at}`,
-					ref: (ref) => this._hint = ref,
-					style: {top, left}
-				}, createElement('div', {
-					className: `${className}__content`
-				}, this.renderContent(content)))
-			)
+			return <div ref={(ref) => this._container = ref}
+				style={this._containerStyle}>
+					{target &&
+						<div className={`${className} ${className}--${at}`}
+							ref={(ref) => this._hint = ref}
+							style={{top, left}}>
+								{onRenderContent
+									? onRenderContent(target, content)
+									: <div className={`${className}__content`}>
+										{content}
+									</div>
+								}
+						</div>
+					}
+				</div>
 		}
 	}
