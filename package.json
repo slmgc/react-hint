@@ -1,36 +1,36 @@
 {
-  "name": "react-hint",
-  "version": "3.0.0",
-  "license": "MIT",
-  "description": "Tooltip component for React, Preact, Inferno",
-  "author": "Vladimir Simonov <slmgc@ya.ru>",
-  "homepage": "https://react-hint.js.org",
-  "repository": "slmgc/react-hint",
-  "main": "lib/index.js",
-  "scripts": {
-    "build": "nwb build",
-    "clean": "nwb clean",
-    "start": "nwb serve --no-clear --port 8080 --reload"
-  },
-  "devDependencies": {
-    "nwb": "0.18.x",
-    "react": "16.x",
-    "react-dom": "16.x"
-  },
-  "files": [
-    "css",
-    "lib",
-    "src",
-    "umd"
-  ],
-  "keywords": [
-    "hint",
-    "inferno",
-    "preact",
-    "react",
-    "react-component",
-    "react-hint",
-    "react-tooltip",
-    "tooltip"
-  ]
+	"name": "react-hint",
+	"version": "3.0.0",
+	"license": "MIT",
+	"description": "Tooltip component for React, Preact, Inferno",
+	"author": "Vladimir Simonov <slmgc@ya.ru>",
+	"homepage": "https://react-hint.js.org",
+	"repository": "slmgc/react-hint",
+	"main": "lib/index.js",
+	"scripts": {
+		"build": "nwb build",
+		"clean": "nwb clean",
+		"start": "nwb serve --no-clear --port 8080 --reload"
+	},
+	"devDependencies": {
+		"nwb": "0.18.x",
+		"react": "16.x",
+		"react-dom": "16.x"
+	},
+	"files": [
+		"css",
+		"lib",
+		"src",
+		"umd"
+	],
+	"keywords": [
+		"hint",
+		"inferno",
+		"preact",
+		"react",
+		"react-component",
+		"react-hint",
+		"react-tooltip",
+		"tooltip"
+	]
 }
