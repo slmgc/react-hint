@@ -207,7 +207,9 @@ MIT
 <script src="https://unpkg.com/react-hint@3/umd/react-hint.min.js"></script>
 <script>
 	const ReactHint = ReactHintFactory.default(React)
+	const attribute = 'data-custom'
 	const className = 'custom-hint'
+
 	const onRenderContent = (target) => {
 		const {catId} = target.dataset
 		const width = 240
@@ -218,6 +220,6 @@ MIT
 
 	ReactDOM.render(React.createElement(() => [
 		React.createElement(ReactHint, {events: true, delay: 100}),
-		React.createElement(ReactHint, {className, events: {click: true}, onRenderContent})
+		React.createElement(ReactHint, {attribute, className, events: {click: true}, onRenderContent})
 	]), demo)
 </script>
