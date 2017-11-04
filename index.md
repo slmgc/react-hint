@@ -86,7 +86,7 @@ class App extends React.Component {
 			<ReactHint persist
 				attribute="data-custom"
 				className="custom-hint"
-				events={{click: true}}
+				events={{% raw %}{click: true}{% endraw %}}
 				onRenderContent={this.onRenderContent}
 				ref={(ref) => this.instance = ref} />
 
