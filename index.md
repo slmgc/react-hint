@@ -56,6 +56,30 @@
 	box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
 }
 
+.primer-btn-primary {
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.15);
+	background-color: #60b044;
+	background-image: -webkit-linear-gradient(#8add6d, #60b044);
+	background-image: linear-gradient(#8add6d, #60b044);
+	border-color: #5ca941;
+}
+
+.primer-btn-primary:hover {
+	color: #fff;
+	background-color: #569e3d;
+	background-image: -webkit-linear-gradient(#79d858, #569e3d);
+	background-image: linear-gradient(#79d858, #569e3d);
+	border-color: #4a993e;
+}
+
+.primer-btn-primary:active {
+	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+	background-color: #569e3d;
+	background-image: none;
+	border-color: #418737;
+}
+
 .custom-hint {
 	position: absolute;
 	z-index: 8888;
@@ -64,6 +88,7 @@
 
 .custom-hint__content > img {
 	display: block;
+	margin-bottom: 10px;
 }
 
 .custom-hint__content {
@@ -89,8 +114,8 @@ React-hint
 	<button class="primer-btn" data-rh="Left" data-rh-at="left">Left</button>
 	<button class="primer-btn" data-rh="Right" data-rh-at="right">Right</button>
 	<button class="primer-btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
-	<button class="primer-btn" data-custom data-custom-at="bottom" data-cat-id="10913">Click Me</button>
-	<button class="primer-btn" data-custom data-custom-at="bottom" data-cat-id="416088">Click Me</button>
+	<button class="primer-btn primer-btn-primary" data-custom data-custom-at="bottom" data-cat-id="10913">Click Me</button>
+	<button class="primer-btn primer-btn-primary" data-custom data-custom-at="bottom" data-cat-id="416088">Click Me</button>
 </p>
 
 How to install
