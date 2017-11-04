@@ -160,6 +160,7 @@ Options
 | persist            | Boolean                                                     | false         | Hide the tooltip only on outside click, hover, etc.
 | position           | "top", "left", "right", "bottom"                            | "top"         | Allows setting the default tooltip placement.
 | ref                | Function                                                    |               | You can pass a function which will get a reference to the tooltip instance.
+
 <br>
 
 | DOM Element Attribute | Type                             | Default Value | Description
