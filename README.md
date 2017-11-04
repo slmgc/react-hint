@@ -18,6 +18,26 @@ npm i -S react-hint
 How to use
 ----------
 
+```jsx
+// React
+import React from 'react'
+import ReactHintFactory from 'react-hint'
+const ReactHint = ReactHintFactory(React)
+
+// Preact
+import {h, Component} from 'preact'
+import ReactHintFactory from 'react-hint'
+const ReactHint = ReactHintFactory({createElement: h, Component})
+
+// Inferno
+import Inferno from 'inferno-compat'
+import ReactHintFactory from 'react-hint'
+const ReactHint = ReactHintFactory(Inferno)
+
+// UMD
+const ReactHint = window.ReactHintFactory.default(window.React)
+```
+
 ReactHint Property|Type|Default Value|Description
 :---|:---|:---|:---
 attribute|String|"data-rh"|Allows to set a custom tooltip attribute instead of a default `data-rh`.
@@ -33,29 +53,37 @@ DOM Element Attribute|Type|Default Value|Description
 data-rh|String or #element-id||To show a tooltip on any DOM element and its children add `data-rh` attribute with a tooltip text to the element. Pass `#element-id` instead of a text to show the element's HTML content.
 data-rh-at|"top", "left", "right", "bottom"|"top"|Allows overriding the default tooltip placement.
 
+Example
+-------
 
 ```jsx
 import React from 'react'
 import {render} from 'react-dom'
-import {ReactHintFactory} from 'react-hint'
+import ReactHintFactory from 'react-hint'
 import 'react-hint/css/index.css'
 
-// You can pass any object which contains
-// `createElement` & `Component` properties.
-// This allows you to pass Inferno/Preact in
-// compatibility mode.
 const ReactHint = ReactHintFactory(React)
+class App extends React.Component {
+	onRenderContent = (target, content) => {
+		const {catId} = target.dataset
+		const width = 240
+		const url = `https://images.pexels.com/photos/${catId}/pexels-photo-${catId}.jpeg?w=${width}`
 
-class App extends Component {
-	toggleCustomHint = ({target}) => {
-		if (this.instance.state.target) target = null
-		this.instance.setState({target})
+		return <div className="custom-hint__content">
+			<img src={url} width={width} />
+			<button ref={(ref) => ref && ref.focus()}
+				onClick={() => this.instance.toggleHint()}>Ok</button>
+		</div>
 	}
 
 	render() {
 		return <div>
 			<ReactHint events delay={100} />
-			<ReactHint attribute="data-custom" className="custom-hint"
+			<ReactHint persist
+				attribute="data-custom"
+				className="custom-hint"
+				events={{click: true}}
+				onRenderContent={this.onRenderContent}
 				ref={(ref) => this.instance = ref} />
 
 			<button data-rh="Default">Default</button>
@@ -63,15 +91,14 @@ class App extends Component {
 			<button data-rh="Right" data-rh-at="right">Right</button>
 			<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>
 			<button data-rh="Left" data-rh-at="left">Left</button>
-			<button data-custom="#content" data-custom-at="bottom"
-				onClick={this.toggleCustomHint}>Click Me</button>
 
-			<div id="content" style={{display: 'none'}}>
-				Here goes a custom tooltip.<br />
-				You can show <b>HTML</b> content in tooltips.<br />
-				<img data-rh="Cat" data-rh-at="bottom"
-					src="https://images.pexels.com/photos/20787/pexels-photo.jpg?w=240" />
-			</div>
+			<button data-custom
+				data-custom-at="bottom"
+				data-cat-id="10913">Click Me</button>
+
+			<button data-custom
+				data-custom-at="bottom"
+				data-cat-id="416088">Click Me</button>
 		</div>
 	}
 }
