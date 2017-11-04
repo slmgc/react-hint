@@ -36,11 +36,11 @@ class App extends React.Component {
 
 			<button data-custom
 				data-custom-at="bottom"
-				data-cat-id="10913">Click</button>
+				data-cat-id="10913">Click Me</button>
 
 			<button data-custom
 				data-custom-at="bottom"
-				data-cat-id="416088">Click</button>
+				data-cat-id="416088">Click Me</button>
 		</div>
 	}
 }

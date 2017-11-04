@@ -5,7 +5,7 @@ module.exports = (nwb) => ({
 	npm: {
 		cjs: true,
 		esModules: false,
-		umd: 'ReactHint'
+		umd: 'ReactHintFactory'
 	},
 	babel: {
 		plugins: [
