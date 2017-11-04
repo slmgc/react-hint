@@ -1,3 +1,10 @@
+<style>
+.highlight .err {
+	color: inherit;
+	background-color: inherit;
+}
+</style>
+
 React-hint
 ==========
 
@@ -90,7 +97,6 @@ class App extends React.Component {
 				onRenderContent={this.onRenderContent}
 				ref={(ref) => this.instance = ref} />
 
-			{% raw %}
 			<button data-rh="Default">Default</button>
 			<button data-rh="Top" data-rh-at="top">Top</button>
 			<button data-rh="Right" data-rh-at="right">Right</button>
@@ -104,7 +110,6 @@ class App extends React.Component {
 			<button data-custom
 				data-custom-at="bottom"
 				data-cat-id="416088">Click Me</button>
-			{% endraw %}
 		</div>
 	}
 }
