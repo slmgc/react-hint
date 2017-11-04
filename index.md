@@ -55,6 +55,24 @@
 	border-color: #b5b5b5;
 	box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
 }
+
+.custom-hint {
+	position: absolute;
+	z-index: 8888;
+	cursor: default;
+}
+
+.custom-hint__content > img {
+	display: block;
+}
+
+.custom-hint__content {
+	margin: 10px;
+	padding: 10px;
+	box-shadow: 0 0 5px rgba(0,0,0,.5);
+	background: floralwhite;
+	color: #000;
+}
 </style>
 
 React-hint
@@ -71,6 +89,8 @@ React-hint
 	<button class="primer-btn" data-rh="Left" data-rh-at="left">Left</button>
 	<button class="primer-btn" data-rh="Right" data-rh-at="right">Right</button>
 	<button class="primer-btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+	<button class="primer-btn" data-custom data-custom-at="bottom" data-cat-id="10913">Click Me</button>
+	<button class="primer-btn" data-custom data-custom-at="bottom" data-cat-id="416088">Click Me</button>
 </p>
 
 How to install
@@ -104,22 +124,21 @@ const ReactHint = window.ReactHintFactory.default(window.React)
 
 Options
 -------
-
-| ReactHint Property | Type														| Default Value | Description
+| ReactHint Property | Type                                                        | Default Value | Description
 | :----------------- | :---------------------------------------------------------- | :------------ | :----------
-| attribute		  | String													  | "data-rh"	 | Allows setting a custom tooltip attribute instead of the default one.
-| className		  | String													  | "react-hint"  | You can override the tooltip style by passing the `className` property.
-| delay			  | Number													  | 0			 | The default delay before showing/hiding the tooltip.
-| events			 | Boolean or {click: Boolean, focus: Boolean, hover: Boolean} | false		 | Enables/disables all events or a subset of events.
-| onRenderContent	| Function													|			   | Passing a function which returns a react node allows rendering custom content with attached event handlers.
-| persist			| Boolean													 | false		 | Hide the tooltip only on outside click, hover, etc.
-| position		   | "top", "left", "right", "bottom"							| "top"		 | Allows setting the default tooltip placement.
-| ref				| Function													|			   | You can pass a function which will get a reference to the tooltip instance.
+| attribute          | String                                                      | "data-rh"     | Allows setting a custom tooltip attribute instead of the default one.
+| className          | String                                                      | "react-hint"  | You can override the tooltip style by passing the `className` property.
+| delay              | Number                                                      | 0             | The default delay before showing/hiding the tooltip.
+| events             | Boolean or {click: Boolean, focus: Boolean, hover: Boolean} | false         | Enables/disables all events or a subset of events.
+| onRenderContent    | Function                                                    |               | Passing a function which returns a react node allows rendering custom content with attached event handlers.
+| persist            | Boolean                                                     | false         | Hide the tooltip only on outside click, hover, etc.
+| position           | "top", "left", "right", "bottom"                            | "top"         | Allows setting the default tooltip placement.
+| ref                | Function                                                    |               | You can pass a function which will get a reference to the tooltip instance.
 
-| DOM Element Attribute | Type							 | Default Value | Description
+| DOM Element Attribute | Type                             | Default Value | Description
 | :-------------------- | :------------------------------- | :------------ | :----------
-| data-rh			   | String						   |			   | Sets the tooltip's content.
-| data-rh-at			| "top", "left", "right", "bottom" | "top"		 | Allows overriding the default tooltip placement.
+| data-rh               | String                           |               | Sets the tooltip's content.
+| data-rh-at            | "top", "left", "right", "bottom" | "top"         | Allows overriding the default tooltip placement.
 
 Example
 -------
@@ -188,5 +207,17 @@ MIT
 <script src="https://unpkg.com/react-hint@3/umd/react-hint.min.js"></script>
 <script>
 	const ReactHint = ReactHintFactory.default(React)
-	ReactDOM.render(React.createElement(ReactHint, {events: true, delay: 100}), demo)
+	const className = 'custom-hint'
+	const onRenderContent = (target) => {
+		const {catId} = target.dataset
+		const width = 240
+		const src = `https://images.pexels.com/photos/${catId}/pexels-photo-${catId}.jpeg?w=${width}`
+		return React.createElement('div', {className: `${className}__content`},
+			React.createElement('img', {src, width}))
+	}
+
+	ReactDOM.render(React.createElement(() => [
+		React.createElement(ReactHint, {events: true, delay: 100}),
+		React.createElement(ReactHint, {className, events: {click: true}, onRenderContent})
+	]), demo)
 </script>
