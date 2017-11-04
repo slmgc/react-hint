@@ -8,9 +8,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["ReactHint"] = factory();
+		exports["ReactHintFactory"] = factory();
 	else
-		root["ReactHint"] = factory();
+		root["ReactHintFactory"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
