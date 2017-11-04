@@ -12,8 +12,14 @@ React-hint
 
 **React-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno).
 
-![react-hint tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/react-hint.gif)
-![custom tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/custom-tooltip.png)
+<p>
+	<div id="demo"></div>
+	<button class="btn" data-rh="Default">Default</button>
+	<button class="btn" data-rh="Top" data-rh-at="top">Top</button>
+	<button class="btn" data-rh="Left" data-rh-at="left">Left</button>
+	<button class="btn" data-rh="Right" data-rh-at="right">Right</button>
+	<button class="btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+</p>
 
 How to install
 --------------
@@ -124,3 +130,11 @@ MIT
 [npm-badge]: https://img.shields.io/npm/v/react-hint.png
 [npm-downloads]: https://img.shields.io/npm/dm/react-hint.svg
 [npm]: https://www.npmjs.org/package/react-hint
+
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/react-hint@3/umd/react-hint.min.js"></script>
+<script>
+	const ReactHint = ReactHintFactory.default(React)
+	ReactDOM.render(React.createElement(ReactHint, {events: true, delay: 100}), demo)
+</script>
