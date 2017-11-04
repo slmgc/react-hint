@@ -220,6 +220,12 @@ MIT
 
 	ReactDOM.render(React.createElement(() => [
 		React.createElement(ReactHint, {events: true, delay: 100}),
-		React.createElement(ReactHint, {attribute, className, events: {click: true}, onRenderContent})
+		React.createElement(ReactHint, {
+			attribute,
+			className,
+			events: {click: true},
+			onRenderContent,
+			persist: true
+		})
 	]), demo)
 </script>
