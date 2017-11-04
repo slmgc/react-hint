@@ -161,6 +161,8 @@ Options
 | position           | "top", "left", "right", "bottom"                            | "top"         | Allows setting the default tooltip placement.
 | ref                | Function                                                    |               | You can pass a function which will get a reference to the tooltip instance.
 
+<br>
+
 | DOM Element Attribute | Type                             | Default Value | Description
 | :-------------------- | :------------------------------- | :------------ | :----------
 | data-rh               | String                           |               | Sets the tooltip's content.
