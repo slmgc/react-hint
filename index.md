@@ -90,19 +90,19 @@ class App extends React.Component {
 				onRenderContent={this.onRenderContent}
 				ref={(ref) => this.instance = ref} />
 
-			<button data\-rh="Default">Default</button>
-			<button data\-rh="Top" data\-rh\-at="top">Top</button>
-			<button data\-rh="Right" data\-rh\-at="right">Right</button>
-			<button data\-rh="Bottom" data\-rh\-at="bottom">Bottom</button>
-			<button data\-rh="Left" data\-rh\-at="left">Left</button>
+			<button data-rh="Default">Default</button>
+			<button data-rh="Top" data-rh-at="top">Top</button>
+			<button data-rh="Right" data-rh-at="right">Right</button>
+			<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+			<button data-rh="Left" data-rh-at="left">Left</button>
 
-			<button data\-custom
-				data\-custom\-at="bottom"
-				data\-cat\-id="10913">Click Me</button>
+			<button data-custom
+				data-custom-at="bottom"
+				data-cat-id="10913">Click Me</button>
 
-			<button data\-custom
-				data\-custom\-at="bottom"
-				data\-cat\-id="416088">Click Me</button>
+			<button data-custom
+				data-custom-at="bottom"
+				data-cat-id="416088">Click Me</button>
 		</div>
 	}
 }
