@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://unpkg.com/react-hint@3/css/index.csss">
+<link rel="stylesheet" href="https://unpkg.com/react-hint@3/css/index.css">
 <style>
 .highlight .err {
 	color: inherit;
