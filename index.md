@@ -209,13 +209,19 @@ MIT
 	const ReactHint = ReactHintFactory.default(React)
 	const attribute = 'data-custom'
 	const className = 'custom-hint'
+	const width = 240
+	let instance = null
+
+	const onClick = () => instance.toggleHint()
+	const ref = (ref) => ref && ref.focus()
 
 	const onRenderContent = (target) => {
 		const {catId} = target.dataset
-		const width = 240
 		const src = `https://images.pexels.com/photos/${catId}/pexels-photo-${catId}.jpeg?w=${width}`
+
 		return React.createElement('div', {className: `${className}__content`},
-			React.createElement('img', {src, width}))
+			React.createElement('img', {src, width}),
+			React.createElement('button', {className: 'primer-btn', onClick, ref}, 'Ok'))
 	}
 
 	ReactDOM.render(React.createElement(() => [
@@ -225,7 +231,8 @@ MIT
 			className,
 			events: {click: true},
 			onRenderContent,
-			persist: true
+			persist: true,
+			ref: (ref) => instance = ref
 		})
 	]), demo)
 </script>
