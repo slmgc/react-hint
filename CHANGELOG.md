@@ -1,3 +1,10 @@
+## 3.0.0 (Nov 4, 2017)
+* Add support for custom content rendering via `onRenderContent` property
+* Add support for `click`, `focus` and `hover` in `events` property
+* Export `ReactHintFactory` function via the default export
+* Depreacte templates via `#element-id` in `data-rh` in favor of custom content rendering
+* Rename `hover` property to `persist`
+
 ## 2.0.3 (Sep 30, 2017)
 * #12: Fix iOS mouseover
 
