@@ -86,23 +86,23 @@ class App extends React.Component {
 			<ReactHint persist
 				attribute="data-custom"
 				className="custom-hint"
-				events={\{click: true\}}
+				events={% raw %}{{click: true}}{% endraw %}
 				onRenderContent={this.onRenderContent}
 				ref={(ref) => this.instance = ref} />
 
-			<button data-rh="Default">Default</button>
-			<button data-rh="Top" data-rh-at="top">Top</button>
-			<button data-rh="Right" data-rh-at="right">Right</button>
-			<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>
-			<button data-rh="Left" data-rh-at="left">Left</button>
+			<button {% raw %}data-rh="Default"{% endraw %}>Default</button>
+			<button {% raw %}data-rh="Top" data-rh-at="top"{% endraw %}>Top</button>
+			<button {% raw %}data-rh="Right" data-rh-at="right"{% endraw %}>Right</button>
+			<button {% raw %}data-rh="Bottom" data-rh-at="bottom"{% endraw %}>Bottom</button>
+			<button {% raw %}data-rh="Left" data-rh-at="left"{% endraw %}>Left</button>
 
-			<button data-custom
+			<button {% raw %}data-custom
 				data-custom-at="bottom"
-				data-cat-id="10913">Click Me</button>
+				data-cat-id="10913"{% endraw %}>Click Me</button>
 
-			<button data-custom
-				data-custom-at="bottom"
-				data-cat-id="416088">Click Me</button>
+			<button {% raw %}data-custom
+				{% raw %}data-custom-at="bottom"
+				{% raw %}data-cat-id="416088">Click Me</button>
 		</div>
 	}
 }
