@@ -1,7 +1,59 @@
+<link rel="stylesheet" href="https://unpkg.com/react-hint@3/css/index.csss">
 <style>
 .highlight .err {
 	color: inherit;
 	background-color: inherit;
+}
+
+.primer-btn {
+	position: relative;
+	display: inline-block;
+	padding: 6px 12px;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #333;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-color: #eee;
+	background-image: -webkit-linear-gradient(#fcfcfc, #eee);
+	background-image: linear-gradient(#fcfcfc, #eee);
+	border: 1px solid #d5d5d5;
+	border-radius: 3px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none
+}
+
+.primer-btn:focus {
+	text-decoration: none;
+	border-color: #51a7e8;
+	outline: none;
+	box-shadow: 0 0 5px rgba(81,167,232,0.5);
+}
+
+.primer-btn:focus:hover {
+	border-color: #51a7e8;
+}
+
+.primer-btn:hover,.btn:active {
+	text-decoration: none;
+	background-color: #ddd;
+	background-image: -webkit-linear-gradient(#eee, #ddd);
+	background-image: linear-gradient(#eee, #ddd);
+	border-color: #ccc;
+}
+
+.primer-btn:active {
+	background-color: #dcdcdc;
+	background-image: none;
+	border-color: #b5b5b5;
+	box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
 }
 </style>
 
@@ -14,11 +66,11 @@ React-hint
 
 <p>
 	<div id="demo"></div>
-	<button class="btn" data-rh="Default">Default</button>
-	<button class="btn" data-rh="Top" data-rh-at="top">Top</button>
-	<button class="btn" data-rh="Left" data-rh-at="left">Left</button>
-	<button class="btn" data-rh="Right" data-rh-at="right">Right</button>
-	<button class="btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
+	<button class="primer-btn" data-rh="Default">Default</button>
+	<button class="primer-btn" data-rh="Top" data-rh-at="top">Top</button>
+	<button class="primer-btn" data-rh="Left" data-rh-at="left">Left</button>
+	<button class="primer-btn" data-rh="Right" data-rh-at="right">Right</button>
+	<button class="primer-btn" data-rh="Bottom" data-rh-at="bottom">Bottom</button>
 </p>
 
 How to install
@@ -53,21 +105,21 @@ const ReactHint = window.ReactHintFactory.default(window.React)
 Options
 -------
 
-| ReactHint Property | Type                                                        | Default Value | Description
+| ReactHint Property | Type														| Default Value | Description
 | :----------------- | :---------------------------------------------------------- | :------------ | :----------
-| attribute          | String                                                      | "data-rh"     | Allows setting a custom tooltip attribute instead of the default one.
-| className          | String                                                      | "react-hint"  | You can override the tooltip style by passing the `className` property.
-| delay              | Number                                                      | 0             | The default delay before showing/hiding the tooltip.
-| events             | Boolean or {click: Boolean, focus: Boolean, hover: Boolean} | false         | Enables/disables all events or a subset of events.
-| onRenderContent    | Function                                                    |               | Passing a function which returns a react node allows rendering custom content with attached event handlers.
-| persist            | Boolean                                                     | false         | Hide the tooltip only on outside click, hover, etc.
-| position           | "top", "left", "right", "bottom"                            | "top"         | Allows setting the default tooltip placement.
-| ref                | Function                                                    |               | You can pass a function which will get a reference to the tooltip instance.
+| attribute		  | String													  | "data-rh"	 | Allows setting a custom tooltip attribute instead of the default one.
+| className		  | String													  | "react-hint"  | You can override the tooltip style by passing the `className` property.
+| delay			  | Number													  | 0			 | The default delay before showing/hiding the tooltip.
+| events			 | Boolean or {click: Boolean, focus: Boolean, hover: Boolean} | false		 | Enables/disables all events or a subset of events.
+| onRenderContent	| Function													|			   | Passing a function which returns a react node allows rendering custom content with attached event handlers.
+| persist			| Boolean													 | false		 | Hide the tooltip only on outside click, hover, etc.
+| position		   | "top", "left", "right", "bottom"							| "top"		 | Allows setting the default tooltip placement.
+| ref				| Function													|			   | You can pass a function which will get a reference to the tooltip instance.
 
-| DOM Element Attribute | Type                             | Default Value | Description
+| DOM Element Attribute | Type							 | Default Value | Description
 | :-------------------- | :------------------------------- | :------------ | :----------
-| data-rh               | String                           |               | Sets the tooltip's content.
-| data-rh-at            | "top", "left", "right", "bottom" | "top"         | Allows overriding the default tooltip placement.
+| data-rh			   | String						   |			   | Sets the tooltip's content.
+| data-rh-at			| "top", "left", "right", "bottom" | "top"		 | Allows overriding the default tooltip placement.
 
 Example
 -------
