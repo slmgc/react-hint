@@ -6,7 +6,6 @@ React-hint
 **React-hint** is a small tooltip component for [React](https://github.com/facebook/react) which is developed with simplicity and performance in mind. It also plays nicely with [Preact](https://github.com/developit/preact) and [Inferno](https://github.com/trueadm/inferno).
 
 ![react-hint tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/react-hint.gif)
-
 ![custom tooltip](https://raw.githubusercontent.com/slmgc/react-hint/master/demo/custom-tooltip.png)
 
 How to install
@@ -38,23 +37,28 @@ const ReactHint = ReactHintFactory(Inferno)
 const ReactHint = window.ReactHintFactory.default(window.React)
 ```
 
-ReactHint Property|Type|Default Value|Description
-:---|:---|:---|:---
-attribute|String|"data-rh"|Allows to set a custom tooltip attribute instead of a default `data-rh`.
-className|String|"react-hint"|You can completely override a tooltip style by passing a `className` property.
-delay|Number|0|The default delay before showing a tooltip.
-events|Boolean|false|Enables/disables `mouseOver` events. Disabling events is useful in case you want to trigger a tooltip programmatically.
-hover|Boolean|false|Enables to hover a mouse cursor over a tooltip.
-position|"top", "left", "right", "bottom"|"top"|Allows to customize a default placement of tooltips.
-ref|Function||You can get a reference to an instance by passing a function which will set it for you, e.g. `<ReactHint ref={(ref) => this.instance = ref} />`. This might be needed to programmatically trigger a tooltip by calling `this.instance.setState({target})` or update it's content by calling `this.instance.forceUpdate()`.
+Options
+-------
 
-DOM Element Attribute|Type|Default Value|Description
-:---|:---|:---|:---
-data-rh|String or #element-id||To show a tooltip on any DOM element and its children add `data-rh` attribute with a tooltip text to the element. Pass `#element-id` instead of a text to show the element's HTML content.
-data-rh-at|"top", "left", "right", "bottom"|"top"|Allows overriding the default tooltip placement.
+| ReactHint Property | Type                                                        | Default Value | Description
+| :----------------- | :---------------------------------------------------------- | :------------ | :----------
+| attribute          | String                                                      | "data-rh"     | Allows setting a custom tooltip attribute instead of the default one.
+| className          | String                                                      | "react-hint"  | You can override the tooltip style by passing the `className` property.
+| delay              | Number                                                      | 0             | The default delay before showing/hiding the tooltip.
+| events             | Boolean or {click: Boolean, focus: Boolean, hover: Boolean} | false         | Enables/disables all events or a subset of events.
+| onRenderContent    | Function                                                    |               | Passing a function which returns a react node allows rendering custom content with attached event handlers.
+| persist            | Boolean                                                     | false         | Hide the tooltip only on outside click, hover, etc.
+| position           | "top", "left", "right", "bottom"                            | "top"         | Allows setting the default tooltip placement.
+| ref                | Function                                                    |               | You can pass a function which will get a reference to the tooltip instance.
+
+| DOM Element Attribute | Type                             | Default Value | Description
+| :-------------------- | :------------------------------- | :------------ | :----------
+| data-rh               | String                           |               | Sets the tooltip's content.
+| data-rh-at            | "top", "left", "right", "bottom" | "top"         | Allows overriding the default tooltip placement.
 
 Example
 -------
+You don't need to include ReactHint in every component which uses tooltips, just include it once in the topmost container component. In case you need to define multiple instances of ReactHint, you can customise the attribute name per instance. ReactHint also supports custom tooltip content with attached event handlers by overriding the content renderer and returning a react node.
 
 ```jsx
 import React from 'react'
