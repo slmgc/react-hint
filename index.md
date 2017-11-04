@@ -162,6 +162,7 @@ Options
 | ref                | Function                                                    |               | You can pass a function which will get a reference to the tooltip instance.
 
 
+
 | DOM Element Attribute | Type                             | Default Value | Description
 | :-------------------- | :------------------------------- | :------------ | :----------
 | data-rh               | String                           |               | Sets the tooltip's content.
