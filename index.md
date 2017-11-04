@@ -149,6 +149,7 @@ const ReactHint = window.ReactHintFactory.default(window.React)
 
 Options
 -------
+
 | ReactHint Property | Type                                                        | Default Value | Description
 | :----------------- | :---------------------------------------------------------- | :------------ | :----------
 | attribute          | String                                                      | "data-rh"     | Allows setting a custom tooltip attribute instead of the default one.
