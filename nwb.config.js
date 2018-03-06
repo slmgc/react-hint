@@ -14,6 +14,9 @@ module.exports = (nwb) => ({
 			}]
 		]
 	},
+	devServer: {
+		disableHostCheck: true
+	},
 	webpack: {
 		aliases: {
 			css: resolve('css'),

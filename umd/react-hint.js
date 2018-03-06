@@ -1,5 +1,5 @@
 /*!
- * react-hint v3.0.0 - https://react-hint.js.org
+ * react-hint v3.0.1 - https://react-hint.js.org
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -11,7 +11,7 @@
 		exports["ReactHintFactory"] = factory();
 	else
 		root["ReactHintFactory"] = factory();
-})(this, function() {
+})(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -201,8 +201,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 				return {
 					content: content, at: at,
-					top: top + targetTop - containerTop,
-					left: left + targetLeft - containerLeft
+					top: top + targetTop - containerTop | 0,
+					left: left + targetLeft - containerLeft | 0
 				};
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
@@ -273,5 +273,5 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 });
 
 /***/ })
-/******/ ]);
+/******/ ])["default"];
 });

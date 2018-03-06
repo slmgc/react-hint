@@ -1,3 +1,6 @@
+## 3.0.1 (Mar 5, 2018)
+* #19: Fix infinite setState loop in IE11
+
 ## 3.0.0 (Nov 4, 2017)
 * Add support for custom content rendering via `onRenderContent` property
 * Add support for `click`, `focus` and `hover` in `events` property
