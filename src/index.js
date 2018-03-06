@@ -115,8 +115,8 @@ export default ({Component, createElement}) =>
 
 			return {
 				content, at,
-				top: top + targetTop - containerTop,
-				left: left + targetLeft - containerLeft
+				top: (top + targetTop - containerTop)|0,
+				left: (left + targetLeft - containerLeft)|0
 			}
 		}
 
