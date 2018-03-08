@@ -236,7 +236,7 @@ MIT
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/react-hint@3/umd/react-hint.min.js"></script>
 <script>
-	const ReactHint = ReactHintFactory.default(React)
+	const ReactHint = ReactHintFactory(React)
 	const attribute = 'data-custom'
 	const className = 'custom-hint'
 	const width = 240
