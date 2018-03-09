@@ -148,7 +148,7 @@ import ReactHintFactory from 'react-hint'
 const ReactHint = ReactHintFactory(Inferno)
 
 // UMD
-const ReactHint = window.ReactHintFactory.default(window.React)
+const ReactHint = window.ReactHintFactory(window.React)
 ```
 
 Options
