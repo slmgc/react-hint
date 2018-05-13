@@ -1,6 +1,6 @@
 {
 	"name": "react-hint",
-	"version": "3.0.1",
+	"version": "3.1.0",
 	"license": "MIT",
 	"description": "Tooltip component for React, Preact, Inferno",
 	"author": "Vladimir Simonov <slmgc@ya.ru>",

@@ -1,3 +1,6 @@
+## 3.1.0 (May 12, 2018)
+* #25: Add support for tooltip autopositioning via `autoPosition` property
+
 ## 3.0.1 (Mar 5, 2018)
 * #19: Fix infinite setState loop in IE11
 
