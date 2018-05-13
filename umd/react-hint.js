@@ -1,5 +1,5 @@
 /*!
- * react-hint v3.0.1 - https://react-hint.js.org
+ * react-hint v3.1.0 - https://react-hint.js.org
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -156,6 +156,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 			}, _this.getHintData = function (_ref4, _ref5) {
 				var target = _ref4.target;
 				var attribute = _ref5.attribute,
+				    autoPosition = _ref5.autoPosition,
 				    position = _ref5.position;
 
 				var content = target.getAttribute(attribute) || '';
@@ -174,6 +175,49 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 				    targetLeft = _target$getBoundingCl.left,
 				    targetWidth = _target$getBoundingCl.width,
 				    targetHeight = _target$getBoundingCl.height;
+
+				if (autoPosition) {
+					var isHoriz = ['left', 'right'].includes(at);
+
+					var _document$documentEle = document.documentElement,
+					    clientHeight = _document$documentEle.clientHeight,
+					    clientWidth = _document$documentEle.clientWidth;
+
+
+					var directions = {
+						left: (isHoriz ? targetLeft - hintWidth : targetLeft + (targetWidth - hintWidth >> 1)) > 0,
+						right: (isHoriz ? targetLeft + targetWidth + hintWidth : targetLeft + (targetWidth + hintWidth >> 1)) < clientWidth,
+						bottom: (isHoriz ? targetTop + (targetHeight + hintHeight >> 1) : targetTop + targetHeight + hintHeight) < clientHeight,
+						top: (isHoriz ? targetTop - (hintHeight >> 1) : targetTop - hintHeight) > 0
+					};
+
+					switch (at) {
+						case 'left':
+							if (!directions.left) at = 'right';
+							if (!directions.top) at = 'bottom';
+							if (!directions.bottom) at = 'top';
+							break;
+
+						case 'right':
+							if (!directions.right) at = 'left';
+							if (!directions.top) at = 'bottom';
+							if (!directions.bottom) at = 'top';
+							break;
+
+						case 'bottom':
+							if (!directions.bottom) at = 'top';
+							if (!directions.left) at = 'right';
+							if (!directions.right) at = 'left';
+							break;
+
+						case 'top':
+						default:
+							if (!directions.top) at = 'bottom';
+							if (!directions.left) at = 'right';
+							if (!directions.right) at = 'left';
+							break;
+					}
+				}
 
 				var top = void 0,
 				    left = void 0;
@@ -263,6 +307,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 		return ReactHint;
 	}(Component), _class.defaultProps = {
 		attribute: 'data-rh',
+		autoPosition: false,
 		className: 'react-hint',
 		delay: 0,
 		events: false,

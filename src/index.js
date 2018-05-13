@@ -2,6 +2,7 @@ export default ({Component, createElement}) =>
 	class ReactHint extends Component {
 		static defaultProps = {
 			attribute: 'data-rh',
+			autoPosition: false,
 			className: 'react-hint',
 			delay: 0,
 			events: false,
@@ -69,9 +70,9 @@ export default ({Component, createElement}) =>
 			if (this.state.target) this.setState(this.getHintData)
 		}
 
-		getHintData = ({target}, {attribute, position}) => {
+		getHintData = ({target}, {attribute, autoPosition, position}) => {
 			const content = target.getAttribute(attribute) || ''
-			const at = target.getAttribute(`${attribute}-at`) || position
+			let at = target.getAttribute(`${attribute}-at`) || position
 
 			const {
 				top: containerTop,
@@ -89,6 +90,57 @@ export default ({Component, createElement}) =>
 				width: targetWidth,
 				height: targetHeight
 			} = target.getBoundingClientRect()
+
+			if (autoPosition) {
+				const isHoriz = ['left', 'right'].includes(at)
+
+				const {
+					clientHeight,
+					clientWidth
+				} = document.documentElement
+
+				const directions = {
+					left: (isHoriz
+						? targetLeft - hintWidth
+						: targetLeft + (targetWidth - hintWidth >> 1)) > 0,
+					right: (isHoriz
+						? targetLeft + targetWidth + hintWidth
+						: targetLeft + (targetWidth + hintWidth >> 1)) < clientWidth,
+					bottom: (isHoriz
+						? targetTop + (targetHeight + hintHeight >> 1)
+						: targetTop + targetHeight + hintHeight) < clientHeight,
+					top: (isHoriz
+						? targetTop - (hintHeight >> 1)
+						: targetTop - hintHeight) > 0
+				}
+
+				switch (at) {
+					case 'left':
+						if (!directions.left) at = 'right'
+						if (!directions.top) at = 'bottom'
+						if (!directions.bottom) at = 'top'
+						break
+
+					case 'right':
+						if (!directions.right) at = 'left'
+						if (!directions.top) at = 'bottom'
+						if (!directions.bottom) at = 'top'
+						break
+
+					case 'bottom':
+						if (!directions.bottom) at = 'top'
+						if (!directions.left) at = 'right'
+						if (!directions.right) at = 'left'
+						break
+
+					case 'top':
+					default:
+						if (!directions.top) at = 'bottom'
+						if (!directions.left) at = 'right'
+						if (!directions.right) at = 'left'
+						break
+				}
+			}
 
 			let top, left
 			switch (at) {

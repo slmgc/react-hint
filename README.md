@@ -43,6 +43,7 @@ Options
 | ReactHint Property | Type                                                        | Default Value | Description
 | :----------------- | :---------------------------------------------------------- | :------------ | :----------
 | attribute          | String                                                      | "data-rh"     | Allows setting a custom tooltip attribute instead of the default one.
+| autoPosition       | Boolean                                                     | false         | Autopositions tooltips based on closeness to window borders.
 | className          | String                                                      | "react-hint"  | You can override the tooltip style by passing the `className` property.
 | delay              | Number                                                      | 0             | The default delay before showing/hiding the tooltip.
 | events             | Boolean or {click: Boolean, focus: Boolean, hover: Boolean} | false         | Enables/disables all events or a subset of events.
@@ -82,7 +83,7 @@ class App extends React.Component {
 
 	render() {
 		return <div>
-			<ReactHint events delay={100} />
+			<ReactHint autoPosition events delay={100} />
 			<ReactHint persist
 				attribute="data-custom"
 				className="custom-hint"
