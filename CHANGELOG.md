@@ -1,3 +1,6 @@
+## 3.1.1 (August 2, 2018)
+* #28: Make react-hint ARIA-compliant
+
 ## 3.1.0 (May 12, 2018)
 * #25: Add support for tooltip autopositioning via `autoPosition` property
 
