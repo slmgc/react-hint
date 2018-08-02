@@ -181,6 +181,7 @@ export default ({Component, createElement}) =>
 					{target &&
 						<div className={`${className} ${className}--${at}`}
 							ref={(ref) => this._hint = ref}
+							role="tooltip"
 							style={{top, left}}>
 								{onRenderContent
 									? onRenderContent(target, content)
