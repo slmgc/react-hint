@@ -1,6 +1,6 @@
 {
 	"name": "react-hint",
-	"version": "3.1.1",
+	"version": "3.2.0",
 	"license": "MIT",
 	"description": "Tooltip component for React, Preact, Inferno",
 	"author": "Vladimir Simonov <slmgc@ya.ru>",
@@ -13,7 +13,7 @@
 		"start": "nwb serve --no-clear --port 8080 --reload"
 	},
 	"devDependencies": {
-		"nwb": "0.22.x",
+		"nwb": "0.23.x",
 		"react": "16.x",
 		"react-dom": "16.x"
 	},

@@ -1,3 +1,6 @@
+## 3.2.0 (December 5, 2018)
+* #29: Allow setting different show & hide delay
+
 ## 3.1.1 (August 2, 2018)
 * #28: Make react-hint ARIA-compliant
 

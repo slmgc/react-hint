@@ -20,7 +20,7 @@ class App extends React.Component {
 
 	render() {
 		return <div>
-			<ReactHint autoPosition events delay={100} />
+			<ReactHint autoPosition events delay={{show: 100, hide: 1000}} />
 			<ReactHint persist
 				attribute="data-custom"
 				className="custom-hint"
