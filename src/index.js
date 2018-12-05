@@ -34,10 +34,16 @@ export default ({Component, createElement}) =>
 		}
 
 		toggleHint = ({target = null} = {}) => {
+			target = this.getHint(target)
 			clearTimeout(this._timeout)
-			this._timeout = setTimeout(() => this.setState(() => ({
-				target: this.getHint(target)
-			})), this.props.delay)
+			this._timeout = setTimeout(() => this.setState(() =>
+				({target})), target === null
+					? this.props.delay.hide === undefined
+						? this.props.delay
+						: this.props.delay.hide
+					: this.props.delay.show === undefined
+						? this.props.delay
+						: this.props.delay.show)
 		}
 
 		getHint = (el) => {
