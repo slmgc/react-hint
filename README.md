@@ -136,7 +136,7 @@ Options
 | attribute          | String                                                      | "data-rh"     | Allows setting a custom tooltip attribute instead of the default one.
 | autoPosition       | Boolean                                                     | false         | Autopositions tooltips based on closeness to window borders.
 | className          | String                                                      | "react-hint"  | You can override the tooltip style by passing the `className` property.
-| delay              | Number or {show: Number, hide: Number}                      | 0             | The default delay before showing/hiding the tooltip.
+| delay              | Number or {show: Number, hide: Number}                      | 0             | The default delay (in milliseconds) before showing/hiding the tooltip.
 | events             | Boolean or {click: Boolean, focus: Boolean, hover: Boolean} | false         | Enables/disables all events or a subset of events.
 | onRenderContent    | Function                                                    |               | Allows rendering of custom HTML content (with attached event handlers). Pass a function which returns a react node.
 | persist            | Boolean                                                     | false         | Hide the tooltip only on outside click, hover, etc.
