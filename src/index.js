@@ -11,7 +11,7 @@ export default ({Component, createElement}) =>
 			position: 'top'
 		}
 
-		state = {target: null}
+		state = {target: null, showA: false, showB: false}
 		_containerStyle = {position: 'relative'}
 
 		componentDidMount() {
@@ -72,8 +72,26 @@ export default ({Component, createElement}) =>
 							a[key] === b[key]), true)
 		}
 
-		componentDidUpdate() {
+		componentDidUpdate(prevProps, prevState) {
 			if (this.state.target) this.setState(this.getHintData)
+
+			// tooltip creation 
+			if (prevState.target === null && this.state.target) this.setState({showA: true, showB: false})
+
+			// tooltip update
+			if (prevState.target && this.state.target)
+			{
+				// skip initial state change after tooltip creation
+				if (!(!prevState.showA && !prevState.showB))
+				{
+					const {left, top} = this.state;
+					// tooltip move
+					if ((left != prevState.left) || (top != prevState.top)) this.setState({showA: !prevState.showA, showB: !prevState.showB})
+				}
+			}
+
+			// tooltip removal
+			else if (prevState.target && this.state.target === null) this.setState({showA: false, showB: false})
 		}
 
 		getHintData = ({target}, {attribute, autoPosition, position}) => {
@@ -180,12 +198,13 @@ export default ({Component, createElement}) =>
 
 		render() {
 			const {className, onRenderContent} = this.props
-			const {target, content, at, top, left} = this.state
+			const {target, content, at, top, left, showA, showB} = this.state
+			const showClassName = showA ? `${className}--show-a` : showB ? `${className}--show-b` : '';
 
 			return <div ref={(ref) => this._container = ref}
 				style={this._containerStyle}>
 					{target &&
-						<div className={`${className} ${className}--${at}`}
+						<div className={`${className} ${className}--${at} ${showClassName}`}
 							ref={(ref) => this._hint = ref}
 							role="tooltip"
 							style={{top, left}}>

@@ -3,7 +3,16 @@
 	position: absolute;
 	z-index: 9999;
 	cursor: default;
-	animation: .5s fadeIn;
+}
+
+.react-hint--show-a {
+	animation: 0.5s fadeInA;
+	animation-fill-mode: both;
+}
+
+.react-hint--show-b {
+	animation: 0.5s fadeInB;
+	animation-fill-mode: both;
 }
 
 .react-hint__content {
@@ -51,7 +60,17 @@
 	border-bottom-color: #000;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInA {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInB {
 	from {
 		opacity: 0;
 	}
