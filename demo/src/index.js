@@ -29,6 +29,7 @@ class App extends React.Component {
 				ref={(ref) => this.instance = ref} />
 
 			<button data-rh="Default">Default</button>
+			<button data-rh="This is a very very long text, This is a very very long text, This is a very very long text">Long text</button>
 			<button data-rh="Top" data-rh-at="top">Top</button>
 			<button data-rh="Right" data-rh-at="right">Right</button>
 			<button data-rh="Bottom" data-rh-at="bottom">Bottom</button>

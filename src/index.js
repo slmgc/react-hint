@@ -1,4 +1,4 @@
-export default ({Component, createElement}) =>
+export default ({Component, createElement, createRef}) =>
 	class ReactHint extends Component {
 		static defaultProps = {
 			attribute: 'data-rh',
@@ -10,8 +10,11 @@ export default ({Component, createElement}) =>
 			persist: false,
 			position: 'top'
 		}
+		_hint = createRef();
+		_container = createRef();
 
-		state = {target: null}
+		state = {target: null, hidden: true}
+		target = null;
 		_containerStyle = {position: 'relative'}
 
 		componentDidMount() {
@@ -34,10 +37,13 @@ export default ({Component, createElement}) =>
 		}
 
 		toggleHint = ({target = null} = {}) => {
-			target = this.getHint(target)
-			clearTimeout(this._timeout)
-			this._timeout = setTimeout(() => this.setState(() =>
-				({target})), target === null
+			target = this.getHint(target);
+			clearTimeout(this._timeout);
+			this._timeout = setTimeout(() => {
+				// this.setState(() => ({target}));
+				this.target = target;
+				this.getHintData();
+			}, target === null
 					? this.props.delay.hide === undefined
 						? this.props.delay
 						: this.props.delay.hide
@@ -48,19 +54,14 @@ export default ({Component, createElement}) =>
 
 		getHint = (el) => {
 			const {attribute, persist} = this.props
-			const {target} = this.state
+			const target = this.target;
 
 			while (el) {
 				if (el === document) break
-				if (persist && el === this._hint) return target
+				if (persist && el === this._hint.current) return target
 				if (el.hasAttribute(attribute)) return el
 				el = el.parentNode
 			} return null
-		}
-
-		shouldComponentUpdate(props, state) {
-			return !this.shallowEqual(state, this.state) ||
-				!this.shallowEqual(props, this.props)
 		}
 
 		shallowEqual = (a, b) => {
@@ -73,29 +74,41 @@ export default ({Component, createElement}) =>
 		}
 
 		componentDidUpdate() {
-			if (this.state.target) this.setState(this.getHintData)
+			if (this.target && !this.state.hidden) {
+				this.getHintData();
+			}
 		}
 
-		getHintData = ({target}, {attribute, autoPosition, position}) => {
-			const content = target.getAttribute(attribute) || ''
-			let at = target.getAttribute(`${attribute}-at`) || position
+		shouldComponentUpdate(props, state) {
+			return !this.shallowEqual(state, this.state) ||
+				!this.shallowEqual(props, this.props)
+		}
+
+		getHintData = () => {
+			if (!this.target) {
+				this.setState({hidden: true});
+				return;
+			}
+			const {attribute, autoPosition, position} = this.props;
+			const content = this.target.getAttribute(attribute) || '';
+			let at = this.target.getAttribute(`${attribute}-at`) || position;
 
 			const {
 				top: containerTop,
 				left: containerLeft
-			} = this._container.getBoundingClientRect()
+			} = this._container.current.getBoundingClientRect()
 
 			const {
 				width: hintWidth,
 				height: hintHeight
-			} = this._hint.getBoundingClientRect()
+			} = this._hint.current.getBoundingClientRect()
 
 			const {
 				top: targetTop,
 				left: targetLeft,
 				width: targetWidth,
 				height: targetHeight
-			} = target.getBoundingClientRect()
+			} = this.target.getBoundingClientRect()
 
 			if (autoPosition) {
 				const isHoriz = ['left', 'right'].includes(at)
@@ -171,32 +184,30 @@ export default ({Component, createElement}) =>
 					left = targetWidth - hintWidth >> 1
 			}
 
-			return {
+			const newState = {
 				content, at,
 				top: (top + targetTop - containerTop)|0,
-				left: (left + targetLeft - containerLeft)|0
+				left: (left + targetLeft - containerLeft)|0,
+				hidden: false,
 			}
+			this.setState(newState);
 		}
 
 		render() {
-			const {className, onRenderContent} = this.props
-			const {target, content, at, top, left} = this.state
-
-			return <div ref={(ref) => this._container = ref}
-				style={this._containerStyle}>
-					{target &&
-						<div className={`${className} ${className}--${at}`}
-							ref={(ref) => this._hint = ref}
-							role="tooltip"
-							style={{top, left}}>
-								{onRenderContent
-									? onRenderContent(target, content)
-									: <div className={`${className}__content`}>
-										{content}
-									</div>
-								}
-						</div>
-					}
+			const {className, onRenderContent} = this.props;
+			const {content, at, top, left} = this.state;
+			return <div ref={this._container} style={this._containerStyle}>
+					<div className={`${className} ${className}--${at}`}
+						ref={this._hint}
+						role="tooltip"
+						style={{top, left, display: this.target ? undefined : 'none'}}>
+							{this.target && (onRenderContent
+								? onRenderContent(this.target, content)
+								: <div className={`${className}__content`}>
+									{content}
+								</div>
+							)}
+					</div>
 				</div>
 		}
 	}
