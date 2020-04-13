@@ -87,36 +87,4 @@ class App extends React.Component {
   }
 }
 
-function App1() {
-  return (
-    <div className="App">
-      <div className="row">
-        <div className="col">
-          <ReactHint
-            autoPosition
-            persist
-            events={{ hover: true }}
-            onRenderContent={() => (
-              <div
-                style={{
-                  minWidth: "100px",
-                  padding: "5px",
-                  border: "1px solid black",
-                  zIndex: "99999",
-                }}
-              >
-                Hello! Something long that could demonstrate the issue even
-                longer bla bla
-              </div>
-            )}
-            attribute="data-tip-tltp1"
-          />
-          <button data-tip-tltp1>Hover me 1 !</button>
-        </div>
-        <div className="col">something else</div>
-      </div>
-    </div>
-  );
-}
-
-render(<App />, demo);
+render(<Demo2 />, demo);
