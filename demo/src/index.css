@@ -1,22 +1,28 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
-  width: 80%;
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	padding: 80px;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -16px;
-  margin-right: -16px;
+button {
+	margin: 5px;
 }
 
-.col {
-  flex-basis: 0;
-  flex-grow: 1;
-  max-width: 100%;
+.custom-hint {
+	position: absolute;
+	z-index: 8888;
+	cursor: default;
 }
 
-.react-hint {
-  position: absolute;
+.custom-hint img {
+	display: block;
 }
+
+.custom-hint__content {
+	margin: 10px;
+	padding: 10px;
+	box-shadow: 0 0 5px rgba(0,0,0,.5);
+	background: floralwhite;
+	color: #000;
+}
+  
