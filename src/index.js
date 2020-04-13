@@ -15,6 +15,7 @@ export default ({Component, createElement, createRef}) =>
 
 		state = {target: null, hidden: true}
 		target = null;
+		placement = null;
 		_containerStyle = {position: 'relative'}
 
 		componentDidMount() {
@@ -40,8 +41,10 @@ export default ({Component, createElement, createRef}) =>
 			target = this.getHint(target);
 			clearTimeout(this._timeout);
 			this._timeout = setTimeout(() => {
-				// this.setState(() => ({target}));
 				this.target = target;
+				if (this.target) {
+					this.placement = null;
+				}
 				this.getHintData();
 			}, target === null
 					? this.props.delay.hide === undefined
@@ -80,8 +83,7 @@ export default ({Component, createElement, createRef}) =>
 		}
 
 		shouldComponentUpdate(props, state) {
-			return !this.shallowEqual(state, this.state) ||
-				!this.shallowEqual(props, this.props)
+			return !this.shallowEqual(state, this.state) || !this.shallowEqual(props, this.props)
 		}
 
 		getHintData = () => {
@@ -91,7 +93,7 @@ export default ({Component, createElement, createRef}) =>
 			}
 			const {attribute, autoPosition, position} = this.props;
 			const content = this.target.getAttribute(attribute) || '';
-			let at = this.target.getAttribute(`${attribute}-at`) || position;
+			let at = this.placement || this.target.getAttribute(`${attribute}-at`) || position;
 
 			const {
 				top: containerTop,
@@ -110,7 +112,7 @@ export default ({Component, createElement, createRef}) =>
 				height: targetHeight
 			} = this.target.getBoundingClientRect()
 
-			if (autoPosition) {
+			if (autoPosition && !this.placement) {
 				const isHoriz = ['left', 'right'].includes(at)
 
 				const {
@@ -184,6 +186,10 @@ export default ({Component, createElement, createRef}) =>
 					left = targetWidth - hintWidth >> 1
 			}
 
+			if (hintHeight > 0 || hintWidth > 0) {
+				// This prevents react-hint from rotating the placements 
+				this.placement = at;
+			}
 			const newState = {
 				content, at,
 				top: (top + targetTop - containerTop)|0,
