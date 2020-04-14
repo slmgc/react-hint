@@ -1,5 +1,5 @@
 /*!
- * react-hint v3.2.0 - https://react-hint.js.org
+ * @saleae/react-hint v3.2.4 - https://react-hint.js.org
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -121,7 +121,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 	var _class, _temp2;
 
 	var Component = _ref.Component,
-	    createElement = _ref.createElement;
+	    createElement = _ref.createElement,
+	    createRef = _ref.createRef;
 	return _temp2 = _class = function (_Component) {
 		_inherits(ReactHint, _Component);
 
@@ -134,7 +135,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 				args[_key] = arguments[_key];
 			}
 
-			return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = { target: null }, _this._containerStyle = { position: 'relative' }, _this.toggleEvents = function (_ref2, flag) {
+			return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this._hint = createRef(), _this._container = createRef(), _this.state = { target: null, hidden: true }, _this.target = null, _this.placement = null, _this._containerStyle = { position: 'relative' }, _this.toggleEvents = function (_ref2, flag) {
 				var events = _ref2.events,
 				    _ref2$events = _ref2.events,
 				    click = _ref2$events.click,
@@ -151,20 +152,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 				target = _this.getHint(target);
 				clearTimeout(_this._timeout);
 				_this._timeout = setTimeout(function () {
-					return _this.setState(function () {
-						return { target: target };
-					});
+					_this.target = target;
+					if (_this.target) {
+						_this.placement = null;
+					}
+					_this.getHintData();
 				}, target === null ? _this.props.delay.hide === undefined ? _this.props.delay : _this.props.delay.hide : _this.props.delay.show === undefined ? _this.props.delay : _this.props.delay.show);
 			}, _this.getHint = function (el) {
 				var _this$props = _this.props,
 				    attribute = _this$props.attribute,
 				    persist = _this$props.persist;
-				var target = _this.state.target;
 
+				var target = _this.target;
 
 				while (el) {
 					if (el === document) break;
-					if (persist && el === _this._hint) return target;
+					if (persist && el === _this._hint.current) return target;
 					if (el.hasAttribute(attribute)) return el;
 					el = el.parentNode;
 				}return null;
@@ -173,30 +176,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 				return keys.length === Object.keys(b).length && keys.reduce(function (result, key) {
 					return result && (typeof a[key] === 'function' && typeof b[key] === 'function' || a[key] === b[key]);
 				}, true);
-			}, _this.getHintData = function (_ref4, _ref5) {
-				var target = _ref4.target;
-				var attribute = _ref5.attribute,
-				    autoPosition = _ref5.autoPosition,
-				    position = _ref5.position;
+			}, _this.getHintData = function () {
+				if (!_this.target) {
+					_this.setState({ hidden: true });
+					return;
+				}
+				var _this$props2 = _this.props,
+				    attribute = _this$props2.attribute,
+				    autoPosition = _this$props2.autoPosition,
+				    position = _this$props2.position;
 
-				var content = target.getAttribute(attribute) || '';
-				var at = target.getAttribute(attribute + '-at') || position;
+				var content = _this.target.getAttribute(attribute) || '';
+				var at = _this.placement || _this.target.getAttribute(attribute + '-at') || position;
 
-				var _this$_container$getB = _this._container.getBoundingClientRect(),
-				    containerTop = _this$_container$getB.top,
-				    containerLeft = _this$_container$getB.left;
+				var _this$_container$curr = _this._container.current.getBoundingClientRect(),
+				    containerTop = _this$_container$curr.top,
+				    containerLeft = _this$_container$curr.left;
 
-				var _this$_hint$getBoundi = _this._hint.getBoundingClientRect(),
-				    hintWidth = _this$_hint$getBoundi.width,
-				    hintHeight = _this$_hint$getBoundi.height;
+				var _this$_hint$current$g = _this._hint.current.getBoundingClientRect(),
+				    hintWidth = _this$_hint$current$g.width,
+				    hintHeight = _this$_hint$current$g.height;
 
-				var _target$getBoundingCl = target.getBoundingClientRect(),
-				    targetTop = _target$getBoundingCl.top,
-				    targetLeft = _target$getBoundingCl.left,
-				    targetWidth = _target$getBoundingCl.width,
-				    targetHeight = _target$getBoundingCl.height;
+				var _this$target$getBound = _this.target.getBoundingClientRect(),
+				    targetTop = _this$target$getBound.top,
+				    targetLeft = _this$target$getBound.left,
+				    targetWidth = _this$target$getBound.width,
+				    targetHeight = _this$target$getBound.height;
 
-				if (autoPosition) {
+				if (autoPosition && !_this.placement) {
 					var isHoriz = ['left', 'right'].includes(at);
 
 					var _document$documentEle = document.documentElement,
@@ -210,32 +217,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 						bottom: (isHoriz ? targetTop + (targetHeight + hintHeight >> 1) : targetTop + targetHeight + hintHeight) < clientHeight,
 						top: (isHoriz ? targetTop - (hintHeight >> 1) : targetTop - hintHeight) > 0
 					};
+					if (!at || !directions[at]) {
+						switch (at) {
+							case 'left':
+								if (!directions.left) at = 'right';
+								if (!directions.top) at = 'bottom';
+								if (!directions.bottom) at = 'top';
+								break;
 
-					switch (at) {
-						case 'left':
-							if (!directions.left) at = 'right';
-							if (!directions.top) at = 'bottom';
-							if (!directions.bottom) at = 'top';
-							break;
+							case 'right':
+								if (!directions.right) at = 'left';
+								if (!directions.top) at = 'bottom';
+								if (!directions.bottom) at = 'top';
+								break;
 
-						case 'right':
-							if (!directions.right) at = 'left';
-							if (!directions.top) at = 'bottom';
-							if (!directions.bottom) at = 'top';
-							break;
+							case 'bottom':
+								if (!directions.bottom) at = 'top';
+								if (!directions.left) at = 'right';
+								if (!directions.right) at = 'left';
+								break;
 
-						case 'bottom':
-							if (!directions.bottom) at = 'top';
-							if (!directions.left) at = 'right';
-							if (!directions.right) at = 'left';
-							break;
-
-						case 'top':
-						default:
-							if (!directions.top) at = 'bottom';
-							if (!directions.left) at = 'right';
-							if (!directions.right) at = 'left';
-							break;
+							case 'top':
+							default:
+								if (!directions.top) at = 'bottom';
+								if (!directions.left) at = 'right';
+								if (!directions.right) at = 'left';
+								break;
+						}
 					}
 				}
 
@@ -263,11 +271,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 						left = targetWidth - hintWidth >> 1;
 				}
 
-				return {
+				if (hintHeight > 0 || hintWidth > 0) {
+					// This prevents react-hint from rotating the placements 
+					_this.placement = at;
+				}
+				var newState = {
 					content: content, at: at,
 					top: top + targetTop - containerTop | 0,
-					left: left + targetLeft - containerLeft | 0
+					left: left + targetLeft - containerLeft | 0,
+					hidden: false
 				};
+				_this.setState(newState);
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
 
@@ -280,47 +294,40 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 			clearTimeout(this._timeout);
 		};
 
+		ReactHint.prototype.componentDidUpdate = function componentDidUpdate() {
+			if (this.target && !this.state.hidden) {
+				this.getHintData();
+			}
+		};
+
 		ReactHint.prototype.shouldComponentUpdate = function shouldComponentUpdate(props, state) {
 			return !this.shallowEqual(state, this.state) || !this.shallowEqual(props, this.props);
 		};
 
-		ReactHint.prototype.componentDidUpdate = function componentDidUpdate() {
-			if (this.state.target) this.setState(this.getHintData);
-		};
-
 		ReactHint.prototype.render = function render() {
-			var _this2 = this;
-
 			var _props = this.props,
 			    className = _props.className,
 			    onRenderContent = _props.onRenderContent;
 			var _state = this.state,
-			    target = _state.target,
 			    content = _state.content,
 			    at = _state.at,
 			    top = _state.top,
 			    left = _state.left;
 
-
 			return createElement(
 				'div',
-				{ ref: function ref(_ref7) {
-						return _this2._container = _ref7;
-					},
-					style: this._containerStyle },
-				target && createElement(
+				{ ref: this._container, style: this._containerStyle },
+				createElement(
 					'div',
 					{ className: className + ' ' + className + '--' + at,
-						ref: function ref(_ref6) {
-							return _this2._hint = _ref6;
-						},
+						ref: this._hint,
 						role: 'tooltip',
-						style: { top: top, left: left } },
-					onRenderContent ? onRenderContent(target, content) : createElement(
+						style: { top: top, left: left, display: this.target ? undefined : 'none' } },
+					this.target && (onRenderContent ? onRenderContent(this.target, content) : createElement(
 						'div',
 						{ className: className + '__content' },
 						content
-					)
+					))
 				)
 			);
 		};

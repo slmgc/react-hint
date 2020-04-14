@@ -134,32 +134,33 @@ export default ({Component, createElement, createRef}) =>
 						? targetTop - (hintHeight >> 1)
 						: targetTop - hintHeight) > 0
 				}
+				if (!at || !directions[at]) {
+					switch (at) {
+						case 'left':
+							if (!directions.left) at = 'right'
+							if (!directions.top) at = 'bottom'
+							if (!directions.bottom) at = 'top'
+							break
 
-				switch (at) {
-					case 'left':
-						if (!directions.left) at = 'right'
-						if (!directions.top) at = 'bottom'
-						if (!directions.bottom) at = 'top'
-						break
+						case 'right':
+							if (!directions.right) at = 'left'
+							if (!directions.top) at = 'bottom'
+							if (!directions.bottom) at = 'top'
+							break
 
-					case 'right':
-						if (!directions.right) at = 'left'
-						if (!directions.top) at = 'bottom'
-						if (!directions.bottom) at = 'top'
-						break
+						case 'bottom':
+							if (!directions.bottom) at = 'top'
+							if (!directions.left) at = 'right'
+							if (!directions.right) at = 'left'
+							break
 
-					case 'bottom':
-						if (!directions.bottom) at = 'top'
-						if (!directions.left) at = 'right'
-						if (!directions.right) at = 'left'
-						break
-
-					case 'top':
-					default:
-						if (!directions.top) at = 'bottom'
-						if (!directions.left) at = 'right'
-						if (!directions.right) at = 'left'
-						break
+						case 'top':
+						default:
+							if (!directions.top) at = 'bottom'
+							if (!directions.left) at = 'right'
+							if (!directions.right) at = 'left'
+							break
+					}
 				}
 			}
 

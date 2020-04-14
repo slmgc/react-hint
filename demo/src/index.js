@@ -87,4 +87,4 @@ class App extends React.Component {
   }
 }
 
-render(<Demo2 />, demo);
+render(<App />, demo);
