@@ -1,15 +1,15 @@
-import React from "react";
-import { render } from "react-dom";
-import ReactHintFactory from "src";
-import "css/index.css";
-import "./index.css";
+import React from 'react'
+import {render} from 'react-dom'
+import ReactHintFactory from 'src'
+import 'css/index.css'
+import './index.css'
 
-const ReactHint = ReactHintFactory(React);
+const ReactHint = ReactHintFactory(React)
 class App extends React.Component {
   onRenderContent = (target, content) => {
-    const { catId } = target.dataset;
-    const width = 240;
-    const url = `https://images.pexels.com/photos/${catId}/pexels-photo-${catId}.jpeg?w=${width}`;
+    const {catId} = target.dataset
+    const width = 240
+    const url = `https://images.pexels.com/photos/${catId}/pexels-photo-${catId}.jpeg?w=${width}`
 
     return (
       <div className="custom-hint__content">
@@ -21,8 +21,8 @@ class App extends React.Component {
           Ok
         </button>
       </div>
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -30,14 +30,14 @@ class App extends React.Component {
         <ReactHint
           auto
           position="top"
-          events={{ hover: true }}
+          events={{hover: true}}
           onRenderContent={() => (
             <div
               style={{
-                minWidth: "100px",
-                padding: "5px",
-                border: "1px solid black",
-                zIndex: "99999",
+                minWidth: '100px',
+                padding: '5px',
+                border: '1px solid black',
+                zIndex: '99999',
               }}
             >
               Hello! Something long that could demonstrate the issue very
@@ -47,12 +47,12 @@ class App extends React.Component {
           )}
           attribute="data-tip1"
         />
-        <ReactHint autoPosition events delay={{ show: 100, hide: 1000 }} />
+        <ReactHint autoPosition events delay={{show: 100, hide: 1000}} />
         <ReactHint
           persist
           attribute="data-custom"
           className="custom-hint"
-          events={{ click: true }}
+          events={{click: true}}
           onRenderContent={this.onRenderContent}
           ref={(ref) => (this.instance = ref)}
         />
@@ -83,8 +83,8 @@ class App extends React.Component {
           Click Me
         </button>
       </div>
-    );
+    )
   }
 }
 
-render(<App />, demo);
+render(<App />, demo)
