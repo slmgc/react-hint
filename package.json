@@ -1,5 +1,5 @@
 {
-	"name": "@saleae/react-hint",
+	"name": "react-hint",
 	"version": "3.2.5",
 	"license": "MIT",
 	"description": "Tooltip component for React, Preact, Inferno",
