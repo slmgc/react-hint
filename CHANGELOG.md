@@ -1,3 +1,6 @@
+## 3.2.1 (April 2, 2021)
+* #49: Fix ininite re-renders during tooltip positioning
+
 ## 3.2.0 (December 5, 2018)
 * #29: Allow setting different show & hide delay
 

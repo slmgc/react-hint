@@ -9,7 +9,7 @@ module.exports = (nwb) => ({
 	},
 	babel: {
 		plugins: [
-			['transform-react-jsx', {
+			['@babel/transform-react-jsx', {
 				pragma: 'createElement'
 			}]
 		]
