@@ -24,9 +24,9 @@ import ReactHintFactory from 'react-hint'
 const ReactHint = ReactHintFactory(React)
 
 // Preact
-import {h, Component} from 'preact'
+import {h, Component, createRef} from 'preact'
 import ReactHintFactory from 'react-hint'
-const ReactHint = ReactHintFactory({createElement: h, Component})
+const ReactHint = ReactHintFactory({createElement: h, Component, createRef})
 
 // Inferno
 import Inferno from 'inferno-compat'
